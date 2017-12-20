@@ -11,7 +11,7 @@ import { Form, Label, Input, FormGroup, Button } from 'reactstrap';
         </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>
-          <Input type="password" name="password" id="examplePassword" placeholder="please enter your password" />
+          <Input type="password" name="password" id="examplePassword" placeholder="Please enter your password" />
         </FormGroup>
         <Button color="success">Sign In</Button>
       </Form>
