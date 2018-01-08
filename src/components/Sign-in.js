@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
 class SignIn extends Component {
 constructor(props){
   super(props);
@@ -29,14 +26,12 @@ render() {
                onChange = {(event,newValue) => this.setState({password:newValue})}
                />
              <br/>
-             <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+             <RaisedButton label="Submit" primary={true} onClick={(event) => this.handleClick(event)}/>
          </div>
          </MuiThemeProvider>
       </div>
     );
   }
 }
-const style = {
- margin: 15,
-};
+
 export default SignIn
