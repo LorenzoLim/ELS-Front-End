@@ -10,37 +10,10 @@ import {
 } from 'material-ui';
 
 const tableData = [
-  {
-    name: 'John Smith',
-    status: 'Employed',
-  },
-  {
-    name: 'Randal White',
-    status: 'Unemployed',
-  },
-  {
-    name: 'Stephanie Sanders',
-    status: 'Employed',
-  },
-  {
-    name: 'Steve Brown',
-    status: 'Employed',
-  },
-  {
-    name: 'Joyce Whitten',
-    status: 'Employed',
-  },
-  {
-    name: 'Samuel Roberts',
-    status: 'Employed',
-  },
-  {
-    name: 'Adam Moore',
-    status: 'Employed',
-  },
+
 ];
 
-class Manage extends Component {
+class Report extends Component {
   state = {
     fixedHeader: true,
     fixedFooter: true,
@@ -71,10 +44,12 @@ class Manage extends Component {
               enableSelectAll={this.state.enableSelectAll}
             >
               <TableRow>
-                <TableHeaderColumn>Project Number</TableHeaderColumn>
-                <TableHeaderColumn>Location</TableHeaderColumn>
                 <TableHeaderColumn>Name</TableHeaderColumn>
-                <TableHeaderColumn>Status</TableHeaderColumn>
+                <TableHeaderColumn>Date</TableHeaderColumn>
+                <TableHeaderColumn>Type</TableHeaderColumn>
+                <TableHeaderColumn>Project Number</TableHeaderColumn>
+                <TableHeaderColumn>Hours</TableHeaderColumn>
+                <TableHeaderColumn>Comments/Notes</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody
@@ -99,4 +74,4 @@ class Manage extends Component {
   }
 }
 
-export default Manage
+export default Report
