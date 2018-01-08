@@ -5,7 +5,9 @@ import SignIn from './components/Sign-in'
 import Checkout from './components/Checkout'
 import ChangePassword from './components/ChangePassword'
 import Junction from './components/Junction'
-import CheckIn from './components/Check-in'
+import Manage from './components/Manage'
+import CheckIn from './components/Check-in';
+import SignOut from './components/Sign-out';
 
 class App extends Component {
   state = {
@@ -17,7 +19,6 @@ class App extends Component {
         <img src={logo} alt="logo" />
         <Junction />
       </div>
-
     );
   }
 }
