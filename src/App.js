@@ -5,6 +5,7 @@ import SignIn from './components/Sign-in'
 import Checkout from './components/Checkout'
 import ChangePassword from './components/ChangePassword'
 import Junction from './components/Junction'
+import Manage from './components/Manage'
 class App extends Component {
   state = {
     login: false
@@ -13,7 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
-        <Junction />
+        <Manage />
       </div>
 
     );
