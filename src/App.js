@@ -5,6 +5,8 @@ import SignIn from './components/Sign-in'
 import Checkout from './components/Checkout'
 import ChangePassword from './components/ChangePassword'
 import Junction from './components/Junction'
+import CheckIn from './components/Check-in'
+
 class App extends Component {
   state = {
     login: false
