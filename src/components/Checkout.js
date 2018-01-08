@@ -13,7 +13,6 @@ render() {
         <MuiThemeProvider>
           <div>
              <TextField
-               type="Comments"
                hintText="Enter Any Notes or Comments"
                floatingLabelText="Comments"
                onChange = {(event,newValue) => this.setState({comments:newValue})}
