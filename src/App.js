@@ -4,7 +4,9 @@ import logo from './images/downer-logo.jpg'
 import SignIn from './components/Sign-in'
 class App extends Component {
   state = {
-    login: false
+    loggedIn: false,
+    jwToken: '',
+    
   }
   render() {
     return (
