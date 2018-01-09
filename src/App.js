@@ -8,6 +8,7 @@ import Junction from './components/Junction'
 import Manage from './components/Manage'
 import CheckIn from './components/Check-in';
 import SignOut from './components/Sign-out';
+import CreateProject from './components/CreateProject'
 
 class App extends Component {
   state = {
@@ -17,7 +18,7 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
-        <Junction />
+        <CreateProject />
       </div>
     );
   }

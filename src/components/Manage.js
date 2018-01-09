@@ -2,26 +2,12 @@ import React, {Component} from 'react';
 import {
   Table,
   TableBody,
-  TableFooter,
   TableHeader,
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
   MuiThemeProvider
 } from 'material-ui';
-import TextField from 'material-ui/TextField';
-import Toggle from 'material-ui/Toggle';
-
-const styles = {
-  propContainer: {
-    width: 200,
-    overflow: 'hidden',
-    margin: '20px auto 0',
-  },
-  propToggleHeader: {
-    margin: '20px auto 10px',
-  },
-};
 
 const tableData = [
   {
