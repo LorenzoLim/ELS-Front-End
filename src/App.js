@@ -8,6 +8,7 @@ import Junction from './components/Junction'
 import Manage from './components/Manage'
 import CheckIn from './components/Check-in';
 import SignOut from './components/Sign-out';
+import CreateProject from './components/CreateProject'
 import Report from './components/Report';
 
 class App extends Component {
@@ -18,7 +19,7 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
-        <Report />
+        <CreateProject />
       </div>
     );
   }
