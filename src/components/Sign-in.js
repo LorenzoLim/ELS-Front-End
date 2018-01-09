@@ -4,7 +4,7 @@ class SignIn extends Component {
 constructor(props){
   super(props);
   this.state={
-  username:'',
+  email:'',
   password:''
   }
  }
@@ -14,8 +14,8 @@ render() {
         <MuiThemeProvider>
           <div>
            <TextField
-             hintText="Enter your Username"
-             floatingLabelText="Username"
+             hintText="Enter Your E-Mail"
+             floatingLabelText="E-Mail"
              onChange = {(event,newValue) => this.setState({username:newValue})}
              />
            <br/>
