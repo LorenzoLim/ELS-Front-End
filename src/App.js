@@ -9,6 +9,7 @@ import Manage from './components/Manage'
 import CheckIn from './components/Check-in';
 import SignOut from './components/Sign-out';
 import CreateProject from './components/CreateProject'
+import Report from './components/Report';
 
 class App extends Component {
   state = {
