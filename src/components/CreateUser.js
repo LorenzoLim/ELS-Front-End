@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
+import {MuiThemeProvider, RaisedButton, TextField, Toggle} from 'material-ui';
 class CreateUser extends Component {
 constructor(props){
   super(props);
@@ -7,7 +7,8 @@ constructor(props){
   firstName:'',
   lastName:'',
   email:'',
-  password:''
+  password:'',
+  role:''
   }
  }
 render() {
@@ -40,6 +41,10 @@ render() {
                onChange = {(event,newValue) => this.setState({password:newValue})}
                />
              <br/>
+             <Toggle
+               label="Set Administrator"
+               className="adminToggle"
+             />
              <RaisedButton label="Create User" primary={true} onClick={(event) => this.handleClick(event)}/>
          </div>
          </MuiThemeProvider>
