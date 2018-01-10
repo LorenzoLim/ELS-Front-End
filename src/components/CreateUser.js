@@ -1,17 +1,41 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 import {MuiThemeProvider, RaisedButton, TextField, Toggle} from 'material-ui';
 class CreateUser extends Component {
-constructor(props){
-  super(props);
-  this.state={
-  firstName:'',
-  lastName:'',
-  email:'',
-  password:'',
-  role:''
-  }
- }
-render() {
+  constructor(props){
+    super(props);
+    this.state = {
+      firstName:'',
+      lastName:'',
+      email:'',
+      password:'',
+      role:'manager'
+    }
+   }
+
+   handleCreateUser = (event) => {
+     let {firstName, lastName, email, password, role} = this.state;
+     axios({
+       method: 'post',
+       url: '/users',
+       headers: {'Content-Type': 'application/json'},
+       data: {
+        firstName,
+        lastName,
+        email,
+        password,
+        role
+      }
+     })
+     .then(function (response) {
+       console.log(response);
+     })
+     .catch(function (error) {
+       console.log(error);
+     });
+   }
+
+ render() {
     return (
       <div>
         <MuiThemeProvider>
@@ -45,8 +69,8 @@ render() {
                label="Set Administrator"
                className="adminToggle"
              />
-             <RaisedButton label="Create User" primary={true} onClick={(event) => this.handleClick(event)}/>
-         </div>
+             <RaisedButton label="Create User" primary={true} onClick={this.handleCreateUser}/>
+           </div>
          </MuiThemeProvider>
       </div>
     );
