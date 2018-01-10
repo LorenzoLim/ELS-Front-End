@@ -35,29 +35,37 @@ class CreateUser extends Component {
      });
    }
 
+   toggleUserRole = (event) => {
+     this.setState((prevState) => {
+       return {
+         role: prevState.role === 'admin' ? 'manager' : 'admin'
+       }
+     })
+   }
+
  render() {
     return (
       <div>
         <MuiThemeProvider>
           <div>
-           <TextField
+            <TextField
              hintText="Enter User's First Name"
              floatingLabelText="First Name"
              onChange = {(event,newValue) => this.setState({firstName:newValue})}
              />
-           <br/>
-           <TextField
+            <br/>
+            <TextField
              hintText="Enter User's Last Name"
              floatingLabelText="Last Name"
              onChange = {(event,newValue) => this.setState({lastName:newValue})}
              />
-           <br/>
-           <TextField
+            <br/>
+            <TextField
              hintText="Enter User's E-Mail"
              floatingLabelText="E-Mail"
              onChange = {(event,newValue) => this.setState({email:newValue})}
              />
-           <br/>
+            <br/>
              <TextField
                type="password"
                hintText="Enter your Password"
@@ -68,10 +76,11 @@ class CreateUser extends Component {
              <Toggle
                label="Set Administrator"
                className="adminToggle"
+               onToggle={this.toggleUserRole}
              />
-             <RaisedButton label="Create User" primary={true} onClick={this.handleCreateUser}/>
-           </div>
-         </MuiThemeProvider>
+            <RaisedButton label="Create User" primary={true} onClick={this.handleCreateUser}/>
+          </div>
+        </MuiThemeProvider>
       </div>
     );
   }
