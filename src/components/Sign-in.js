@@ -8,7 +8,6 @@ constructor(props){
   password:''
   }
  }
- 
 render() {
     return (
       <div>
@@ -27,7 +26,7 @@ render() {
                onChange = {(event,newValue) => this.setState({password:newValue})}
                />
              <br/>
-             <RaisedButton label="Sign-In" primary={true} onClick={(event) => this.handleClick(event)}/>
+             <RaisedButton className="button" label="Sign-In" primary={true} onClick={(event) => this.handleClick(event)}/>
          </div>
          </MuiThemeProvider>
       </div>

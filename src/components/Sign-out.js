@@ -13,7 +13,7 @@ render() {
       <div>
         <MuiThemeProvider>
           <div>
-             <RaisedButton label="SignOut" primary={true} onClick={(event) => this.handleClick(event)}/>
+             <RaisedButton className="button"label="SignOut" primary={true} onClick={(event) => this.handleClick(event)}/>
          </div>
          </MuiThemeProvider>
       </div>

@@ -27,7 +27,7 @@ render() {
                onChange = {(event,newValue) => this.setState({newPassword:newValue})}
                />
              <br/>
-             <RaisedButton label="Change Password" primary={true} onClick={(event) => this.handleClick(event)}/>
+             <RaisedButton className="button"label="Change Password" primary={true} onClick={(event) => this.handleClick(event)}/>
          </div>
          </MuiThemeProvider>
       </div>

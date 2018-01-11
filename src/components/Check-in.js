@@ -41,7 +41,7 @@ for (let i = 0; i < 100; i++ ) {
             {projects}
           </SelectField>
           <br/>
-          <RaisedButton label="Start Work" primary={true} onClick={(event) => this.handleClick(event)}/>
+          <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event) => this.handleClick(event)}/>
         </div>
       </MuiThemeProvider>
     );

@@ -18,7 +18,7 @@ render() {
                onChange = {(event,newValue) => this.setState({comments:newValue})}
                />
              <br/>
-             <RaisedButton label="Check Out" primary={true} onClick={(event) => this.handleClick(event)}/>
+             <RaisedButton className="button" label="Check Out" primary={true} onClick={(event) => this.handleClick(event)}/>
          </div>
          </MuiThemeProvider>
       </div>

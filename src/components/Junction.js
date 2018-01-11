@@ -13,13 +13,13 @@ render() {
       <div>
         <MuiThemeProvider>
           <div>
-            <RaisedButton className="junctionButton" label="Manage" primary={true} onClick={(event) => this.handleClick(event)}/>
+            <RaisedButton className="button" label="Manage" primary={true} onClick={(event) => this.handleClick(event)}/>
             <br />
-            <RaisedButton className="junctionButton" label="View Final Report" primary={true} onClick={(event) => this.handleClick(event)}/>
+            <RaisedButton className="button" label="View Final Report" primary={true} onClick={(event) => this.handleClick(event)}/>
             <br />
-            <RaisedButton className="junctionButton" label="Create New Manager" primary={true} onClick={(event) => this.handleClick(event)}/>
+            <RaisedButton className="button" label="Create New Manager" primary={true} onClick={(event) => this.handleClick(event)}/>
             <br />
-            <RaisedButton className="junctionButton" label="Create New Project" primary={true} onClick={(event) => this.handleClick(event)}/>
+            <RaisedButton className="button" label="Create New Project" primary={true} onClick={(event) => this.handleClick(event)}/>
           </div>
         </MuiThemeProvider>
       </div>

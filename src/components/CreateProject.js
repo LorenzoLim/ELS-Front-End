@@ -39,7 +39,7 @@ render() {
               onChange = {(event,newValue) => this.setState({projectstatus:newValue})}
             />
             <br/>
-            <RaisedButton label="Create Project" primary={true} onClick={(event) => this.handleClick(event)}/>
+            <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleClick(event)}/>
           </div>
          </MuiThemeProvider>
       </div>
