@@ -78,7 +78,7 @@ class CreateUser extends Component {
                className="adminToggle"
                onToggle={this.toggleUserRole}
              />
-            <RaisedButton label="Create User" primary={true} onClick={this.handleCreateUser}/>
+            <RaisedButton className="button" label="Create User" primary={true} onClick={this.handleCreateUser}/>
           </div>
         </MuiThemeProvider>
       </div>
