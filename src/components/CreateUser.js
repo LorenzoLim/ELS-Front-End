@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import axios from 'axios'
+import { api } from '../api'
 import {MuiThemeProvider, RaisedButton, TextField, Toggle} from 'material-ui';
 class CreateUser extends Component {
   constructor(props){
@@ -15,7 +15,7 @@ class CreateUser extends Component {
 
    handleCreateUser = (event) => {
      let {firstName, lastName, email, password, role} = this.state;
-     axios({
+     api({
        method: 'post',
        url: '/users',
        headers: {'Content-Type': 'application/json'},
