@@ -5,9 +5,9 @@ class CreateUser extends Component {
   constructor(props){
     super(props);
     this.state = {
-      firstName:'',
-      lastName:'',
-      email:'',
+      firstName: '',
+      lastName: '',
+      email: '',
       password:'',
       role:'manager'
     }
@@ -27,10 +27,10 @@ class CreateUser extends Component {
         role
       }
      })
-     .then(function (response) {
+     .then((response) => {
        console.log(response);
      })
-     .catch(function (error) {
+     .catch((error) => {
        console.log(error);
      });
    }
