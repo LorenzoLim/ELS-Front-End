@@ -11,6 +11,8 @@ import SignOut from './components/Sign-out'
 import CreateProject from './components/CreateProject'
 import Report from './components/Report'
 import CreateUser from './components/CreateUser'
+require('dotenv').config()
+
 
 class App extends Component {
   state = {
