@@ -14,7 +14,7 @@ import CreateUser from './components/CreateUser'
 
 class App extends Component {
   state = {
-    login: false
+    loggedIn: false
   }
   render() {
     return (
