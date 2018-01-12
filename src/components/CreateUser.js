@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { api } from '../api'
+import { api } from '../request'
 import {MuiThemeProvider, RaisedButton, TextField, Toggle} from 'material-ui';
 class CreateUser extends Component {
   constructor(props){
