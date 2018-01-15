@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import { createProject } from '../request'
+import { api } from '../request'
 
 import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
-class SignIn extends Component {
+class CreateProject extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -13,9 +13,9 @@ class SignIn extends Component {
     }
   }
 
-  handleCreateProject = (event) => {
+  handleCreateProject = () => {
     let {projectNum, projectLocation, projectName, projectStatus} = this.state;
-    createProject({
+    api({
       method: 'post',
       url: '/projects',
       headers: {'Content-Type': 'application/json'},
@@ -63,7 +63,7 @@ class SignIn extends Component {
               onChange = {(event,newValue) => this.setState({projectStatus:newValue})}
             />
             <br/>
-            <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject(event)} />
+            <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject()} />
           </div>
         </MuiThemeProvider>
       </div>
@@ -71,4 +71,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn
+export default CreateProject

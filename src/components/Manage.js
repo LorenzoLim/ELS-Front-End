@@ -6,42 +6,18 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
-  MuiThemeProvider
+  MuiThemeProvider,
+  MenuItem,
+  SelectField
 } from 'material-ui';
-
-const tableData = [
-  {
-    name: 'John Smith',
-    status: 'Employed',
-  },
-  {
-    name: 'Randal White',
-    status: 'Unemployed',
-  },
-  {
-    name: 'Stephanie Sanders',
-    status: 'Employed',
-  },
-  {
-    name: 'Steve Brown',
-    status: 'Employed',
-  },
-  {
-    name: 'Joyce Whitten',
-    status: 'Employed',
-  },
-  {
-    name: 'Samuel Roberts',
-    status: 'Employed',
-  },
-  {
-    name: 'Adam Moore',
-    status: 'Employed',
-  },
-];
+// import {apiGet} from '../request.js'
 
 class Manage extends Component {
   state = {
+    projectNumber: "",
+    projectLocation: "",
+    name: "",
+    status: "",
     fixedHeader: true,
     fixedFooter: true,
     stripedRows: false,
@@ -51,14 +27,33 @@ class Manage extends Component {
     enableSelectAll: false,
     deselectOnClickaway: true,
     showCheckboxes: false,
-    height: '300px',
+    height: '300px'
   };
+  // componentWillMount() {
+  //   let tableData = [];
+  //   apiGet ('/projects')
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // }
 
   render() {
     return (
       <MuiThemeProvider>
         <div>
-          <Table
+           {/* <SelectField
+          floatingLabelText="Select Project  "
+          value={this.state.value}
+          onChange={this.handleChange}
+        >
+          .map(data => <MenuItem value={this.state.value} primaryText={this.state.project} /> )
+           {tableData.map(x => <MenuItem key= {x.payload} value= {x.payload} primaryText= {x.projectName} />)
+
+        </SelectField>  */}
+          {/* <Table
             height={this.state.height}
             fixedHeader={this.state.fixedHeader}
             fixedFooter={this.state.fixedFooter}
@@ -83,7 +78,7 @@ class Manage extends Component {
               showRowHover={this.state.showRowHover}
               stripedRows={this.state.stripedRows}
             >
-              {tableData.map( (row, index) => (
+              {this.props.tableData.map((row, index) => (
                 <TableRow key={index}>
                   <TableRowColumn>{row.projectNumber}</TableRowColumn>
                   <TableRowColumn>{row.projectLocation}</TableRowColumn>
@@ -91,8 +86,8 @@ class Manage extends Component {
                   <TableRowColumn>{row.status}</TableRowColumn>
                 </TableRow>
                 ))}
-            </TableBody>
-          </Table>
+            </TableBody> */}
+          {/* </Table> */}
         </div>
       </MuiThemeProvider>
     );
