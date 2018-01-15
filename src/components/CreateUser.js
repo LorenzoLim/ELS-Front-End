@@ -15,7 +15,7 @@ class CreateUser extends Component {
 
    handleCreateUser = (event) => {
      let {firstName, lastName, email, password, role} = this.state;
-     api({
+     api ({
        method: 'post',
        url: '/users',
        headers: {'Content-Type': 'application/json'},
