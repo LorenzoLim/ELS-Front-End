@@ -24,6 +24,7 @@ class SignIn extends Component {
     .then((response) => {
       console.log(response);
       setJwt(response.data.token)
+      window.location.reload(true)
     })
     .catch((error) => {
       console.log(error);

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {MuiThemeProvider, SelectField, MenuItem, RaisedButton} from 'material-ui';
+import {MuiThemeProvider, MenuItem, RaisedButton, DropDownMenu} from 'material-ui';
+import {api} from '../request'
 
 
 
@@ -14,34 +15,62 @@ for (let i = 0; i < 100; i++ ) {
  */
  class CheckIn extends Component {
   state = {
-    value: 10,
+    selectedHourType: null,
+    selectedProject: null,
   };
 
-  handleChange = (event, index, value) => {
-    this.setState({value});
-  };
+  hourType = [
+    'Work',
+    'Lazy'
+  ];
+
+  projects = [
+    'thing',
+    'thing1',
+    'thing2'
+  ];
+
+  handleHourChange = (event, index, value) => this.setState({value});
+
+  handleProjectChange = (event, index, value) => this.setState({value});
+
+  handleCheckIn = () => {
+    api({
+      method: 'post',
+      url: '/hours',
+      data: {
+
+      }
+    })
+}
 
   render() {
     return (
       <MuiThemeProvider>
         <div>
-          <SelectField
-            value={this.state.value}
-            onChange={this.handleChange}
+          <DropDownMenu
+            hintText="Select a project"
+            value={this.projects.length}
+            onChange={this.handleProjectChange}
             maxHeight={200}
           >
-            {projects}
-          </SelectField>
+          {this.projects.map((projectName, index) =>
+          <MenuItem key={index} value={index} primaryText={projectName} />
+        )}
+          </DropDownMenu>
           <br/>
-          <SelectField
-            value={this.state.value}
-            onChange={this.handleChange}
+          <DropDownMenu
+            hintText="Select an hour type"
+            value={this.hourType.length}
+            onChange={this.handleHourChange}
             maxHeight={200}
           >
-            {projects}
-          </SelectField>
+            {this.hourType.map((type, index) =>
+            <MenuItem key={index} value={index} primaryText={type} />
+          )}
+          </DropDownMenu>
           <br/>
-          <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event) => this.handleClick(event)}/>
+          <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event,newValue) => this.setState({selectedHourType:newValue})}/>
         </div>
       </MuiThemeProvider>
     );
