@@ -46,9 +46,9 @@ class Manage extends Component {
       })
       console.log(this.state.projects);
     })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
 
