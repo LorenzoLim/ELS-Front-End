@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css'
 import logo from './images/downer-logo.jpg'
-import SignIn from './components/Sign-in'
+import SignIn from './components/SignIn'
 import Checkout from './components/Checkout'
 import ChangePassword from './components/ChangePassword'
 import Junction from './components/Junction'
@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
-        <Manage />
+        <SignIn />
       </div>
     );
   }
