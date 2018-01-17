@@ -10,7 +10,7 @@ import CheckIn from './components/Check-in'
 import SignOut from './components/Sign-out'
 import CreateProject from './components/CreateProject'
 import CreateUser from './components/CreateUser'
-import ProjectCard from './components/ProjectCard'
+
 require('dotenv').config()
 
 
@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
-        <Manage />
+
       </div>
     );
   }

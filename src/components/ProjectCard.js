@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-  MuiThemeProvider,
   Table,
   TableBody,
   TableHeader,
@@ -21,7 +20,7 @@ class ProjectCard extends Component {
     this.fetchProject(this.props.projectId)
   }
   componentWillReceiveProps(nextProps) {
-    if (this.props.projectId != nextProps.projectId) {
+    if (this.props.projectId !== nextProps.projectId) {
       this.fetchProject(nextProps.projectId)
     }
 
@@ -43,10 +42,10 @@ class ProjectCard extends Component {
   }
 
   render() {
-    const { projects, projectName, projectLocation, projectStatus} = this.state
+    const {projectName, projectLocation, projectStatus} = this.state
 
     return (
-      <MuiThemeProvider>
+      <div>
         <Table>
           <TableHeader>
             <TableRow>
@@ -65,7 +64,8 @@ class ProjectCard extends Component {
             </TableRow>
           </TableBody>
         </Table>
-      </MuiThemeProvider>
+
+      </div>
     )
   }
 }

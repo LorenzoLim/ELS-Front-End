@@ -14,14 +14,7 @@ class Manage extends Component {
     //let projectNames = [];
     api.get ('/projects')
       .then(response => {
-    /*    let array = response.data
-        for(var i = 0; i < array.length; i++) {
-          let obj = array[i];
-          projectNames.push(obj.projectName)
-          console.log(obj.projectName);
-        }*/
         this.setState({
-          //projectNames: projectNames,
           projects: response.data
         })
         console.log(response.data);
@@ -39,9 +32,8 @@ class Manage extends Component {
 
   render() {
     const {projects, selected} = this.state
-
     if (!projects) {
-      return null;
+      return null
     }
 
     return (
