@@ -1,114 +1,58 @@
 import React, {Component} from 'react';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-  MuiThemeProvider,
-  MenuItem,
-  SelectField
-} from 'material-ui';
+import {MuiThemeProvider, SelectField, MenuItem} from 'material-ui';
+import ProjectCard from './ProjectCard'
 import {api} from '../request.js'
 
 class Manage extends Component {
   state = {
-    projectNumber: "",
-    projectLocation: "",
-    projectName: "",
-    projectStatus: "",
-    projects: [],
-    fixedHeader: true,
-    fixedFooter: true,
-    stripedRows: false,
-    showRowHover: false,
-    selectable: true,
-    multiSelectable: false,
-    enableSelectAll: false,
-    deselectOnClickaway: true,
-    showCheckboxes: false,
-    height: '300px'
+//    projectNames: [],
+    projects: null,
+    selected: null
   };
 
   componentWillMount(response) {
-    let tableData = [];
+    //let projectNames = [];
     api.get ('/projects')
-    .then(response => {
-      let array = response.data
-      for(var i = 0; i < array.length; i++) {
-        let obj = array[i];
-        tableData.push(obj.projectName)
-        console.log(obj.projectName);
-      }
-      this.setState({
-        projects: tableData
+      .then(response => {
+        this.setState({
+          projects: response.data
+        })
+        console.log(response.data);
       })
-      console.log(this.state.projects);
-    })
       .catch(function (error) {
         console.log(error);
       });
   }
 
+  handleChange = (event, index, value) => {
+    this.setState({
+      selected: value
+    })
+  };
 
-render() {
-  const {projects} = this.state
-  return (
-    <MuiThemeProvider>
-      <div>
+  render() {
+    const {projects, selected} = this.state
+    if (!projects) {
+      return null
+    }
 
-        <SelectField
-          floatingLabelText="Select Project  "
-          value={projects}
-          onChange={this.handleChange}
-          >
-
-            {projects.map((projectName, index) =>
-            <MenuItem key={index} value={index} primaryText={projectName} />
-          )}
-            {/* <MenuItem value={this.state.projects} primaryText={projects} /> */}
-
-        </SelectField>
-        {/* <Table
-          height={this.state.height}
-          fixedHeader={this.state.fixedHeader}
-          fixedFooter={this.state.fixedFooter}
-          selectable={this.state.selectable}
-          multiSelectable={this.state.multiSelectable}
-          >
-          <TableHeader
-          displaySelectAll={this.state.showCheckboxes}
-          adjustForCheckbox={this.state.showCheckboxes}
-          enableSelectAll={this.state.enableSelectAll}
-          >
-          <TableRow>
-          <TableHeaderColumn>Project Number</TableHeaderColumn>
-          <TableHeaderColumn>Location</TableHeaderColumn>
-          <TableHeaderColumn>Name</TableHeaderColumn>
-          <TableHeaderColumn>Status</TableHeaderColumn>
-        </TableRow>
-      </TableHeader>
-      <TableBody
-      displayRowCheckbox={this.state.showCheckboxes}
-      deselectOnClickaway={this.state.deselectOnClickaway}
-      showRowHover={this.state.showRowHover}
-      stripedRows={this.state.stripedRows}
-      >
-      {this.props.tableData.map((row, index) => (
-      <TableRow key={index}>
-      <TableRowColumn>{row.projectNumber}</TableRowColumn>
-      <TableRowColumn>{row.projectLocation}</TableRowColumn>
-      <TableRowColumn>{row.name}</TableRowColumn>
-      <TableRowColumn>{row.status}</TableRowColumn>
-    </TableRow>
-  ))}
-</TableBody>
-</Table> */}
-</div>
-</MuiThemeProvider>
-);
-}
+    return (
+      <MuiThemeProvider>
+        <div>
+          <SelectField
+            floatingLabelText="Select Project  "
+            value={selected}
+            onChange={this.handleChange}
+            >
+              {projects.map((project) =>
+                <MenuItem key={project._id} value={project._id} primaryText={project.projectName} />
+              )}
+          </SelectField>
+        </div>
+        <ProjectCard projectId={selected}/>
+      </MuiThemeProvider>
+    );
+  }
 }
 
 export default Manage
