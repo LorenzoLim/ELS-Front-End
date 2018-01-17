@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css'
 import logo from './images/downer-logo.jpg'
-import SignIn from './components/Sign-in'
+import SignIn from './components/SignIn'
 import Checkout from './components/Checkout'
 import ChangePassword from './components/ChangePassword'
 import Junction from './components/Junction'
 import Manage from './components/Manage'
-import CheckIn from './components/Check-in'
-import SignOut from './components/Sign-out'
+import CheckIn from './components/CheckIn'
+import SignOut from './components/SignOut'
 import CreateProject from './components/CreateProject'
 import Report from './components/Report'
 import CreateUser from './components/CreateUser'
@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
-        <Manage />
+        <SignIn />
       </div>
     );
   }

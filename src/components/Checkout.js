@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
-class Checkout extends Component {
+class CheckOut extends Component {
 constructor(props){
   super(props);
   this.state={
@@ -26,4 +26,4 @@ render() {
   }
 }
 
-export default Checkout
+export default CheckOut
