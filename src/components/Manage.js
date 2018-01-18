@@ -17,7 +17,6 @@ class Manage extends Component {
         this.setState({
           projects: response.data
         })
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

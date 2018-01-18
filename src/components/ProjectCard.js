@@ -17,6 +17,7 @@ class ProjectCard extends Component {
     projectLocation: "",
     projectName: "",
     projectStatus: "",
+    projectUsers: null,
     showCheckboxes: false,
     fixedHeader: true,
     fixedFooter: true
@@ -33,13 +34,14 @@ class ProjectCard extends Component {
   fetchProject(projectId) {
     api.get(`/projects/${projectId}`)
       .then(({data}) => {
-        console.log("hgfds", data);
         this.setState({
           projectNum: data.projectNum,
           projectLocation: data.projectLocation,
           projectName: data.projectName,
           projectStatus: data.projectStatus,
+          projectUsers: data.projectUsers
         })
+
       })
       .catch(function (error) {
         console.log(error);
@@ -47,9 +49,12 @@ class ProjectCard extends Component {
   }
 
   render() {
-    const {projectName, projectLocation, projectStatus, projectNum} = this.state
-
+    const {projectLocation, projectStatus, projectNum, projectUsers} = this.state
+    if (!projectUsers) {
+      return null;
+    }
     return (
+
       <div>
         <Table>
           <TableHeader
@@ -69,7 +74,13 @@ class ProjectCard extends Component {
           <TableBody displayRowCheckbox={this.state.showCheckboxes}>
             <TableRow>
               <TableRowColumn>{projectNum}</TableRowColumn>
-              <TableRowColumn>{projectName}</TableRowColumn>
+              <TableRowColumn>
+                {
+                  projectUsers.map((user) => (
+                    <span>{user.firstName} {user.lastName} <br /></span>
+                  )
+                )}
+              </TableRowColumn>
               <TableRowColumn>{projectLocation}</TableRowColumn>
               <TableRowColumn>{projectStatus}</TableRowColumn>
               <TableRowColumn>{null}</TableRowColumn>
