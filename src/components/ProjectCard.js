@@ -83,12 +83,18 @@ class ProjectCard extends Component {
               </TableRowColumn>
               <TableRowColumn>{projectLocation}</TableRowColumn>
               <TableRowColumn>{projectStatus}</TableRowColumn>
-              <TableRowColumn>{null}</TableRowColumn>
+              <TableRowColumn>
+                {
+                  projectUsers.map((user) => {
+                    <span>{user.hours} </span>
+                  })
+                }
+                </TableRowColumn>
             </TableRow>
           </TableBody>
         </Table>
         <div>
-          <RaisedButton label="Export" onChange={this.handleDownload} primary={true} />
+          <RaisedButton className="button" label="Export" onChange={this.handleDownload} primary={true} />
         </div>
       </div>
     )
