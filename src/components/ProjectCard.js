@@ -5,8 +5,10 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
+  TableRowColumn
+
 } from 'material-ui/Table';
+import RaisedButton from 'material-ui/RaisedButton';
 import {api} from '../request.js'
 
 class ProjectCard extends Component {
@@ -15,6 +17,9 @@ class ProjectCard extends Component {
     projectLocation: "",
     projectName: "",
     projectStatus: "",
+    showCheckboxes: false,
+    fixedHeader: true,
+    fixedFooter: true
   };
   componentWillMount() {
     this.fetchProject(this.props.projectId)
@@ -30,7 +35,7 @@ class ProjectCard extends Component {
       .then(({data}) => {
         console.log("hgfds", data);
         this.setState({
-          projectNumber: data.projectNumber,
+          projectNum: data.projectNum,
           projectLocation: data.projectLocation,
           projectName: data.projectName,
           projectStatus: data.projectStatus,
@@ -42,21 +47,28 @@ class ProjectCard extends Component {
   }
 
   render() {
-    const {projectName, projectLocation, projectStatus} = this.state
+    const {projectName, projectLocation, projectStatus, projectNum} = this.state
 
     return (
       <div>
         <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHeaderColumn>Name</TableHeaderColumn>
-              <TableHeaderColumn>Location</TableHeaderColumn>
-              <TableHeaderColumn>Status</TableHeaderColumn>
-              <TableHeaderColumn>Hours</TableHeaderColumn>
+          <TableHeader
+             displaySelectAll={this.state.showCheckboxes}
+             fixedHeader={this.state.fixedHeader}
+             fixedFooter={this.state.fixedFooter}
+             adjustForCheckbox={this.state.showCheckboxes}
+          >
+            <TableRow className="tableHeaderStyle">
+              <TableHeaderColumn tooltip="Project number">Project Number</TableHeaderColumn>
+              <TableHeaderColumn tooltip="The managers">Manager/s</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Location">Location</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Status">Status</TableHeaderColumn>
+              <TableHeaderColumn tooltip="hours">Hours</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody displayRowCheckbox={this.state.showCheckboxes}>
             <TableRow>
+              <TableRowColumn>{projectNum}</TableRowColumn>
               <TableRowColumn>{projectName}</TableRowColumn>
               <TableRowColumn>{projectLocation}</TableRowColumn>
               <TableRowColumn>{projectStatus}</TableRowColumn>
@@ -64,7 +76,9 @@ class ProjectCard extends Component {
             </TableRow>
           </TableBody>
         </Table>
-
+        <div>
+          <RaisedButton label="Export" onChange={this.handleDownload} primary={true} />
+        </div>
       </div>
     )
   }
