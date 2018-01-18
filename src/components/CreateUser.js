@@ -17,7 +17,7 @@ class CreateUser extends Component {
      let {firstName, lastName, email, password, role} = this.state;
      api ({
        method: 'post',
-       url: '/users',
+       url: '/auth/register',
        headers: {'Content-Type': 'application/json'},
        data: {
         firstName,

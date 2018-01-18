@@ -11,7 +11,9 @@ import CreateProject from './components/CreateProject'
 import CreateUser from './components/CreateUser'
 import { api, setJwt } from './request'
 import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
+var injectTapEventPlugin = require("react-tap-event-plugin");
 
+injectTapEventPlugin();
 require('dotenv').config()
 
 

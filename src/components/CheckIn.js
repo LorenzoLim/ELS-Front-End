@@ -2,37 +2,35 @@ import React, {Component} from 'react';
 import {MuiThemeProvider, MenuItem, RaisedButton, DropDownMenu} from 'material-ui';
 import {api} from '../request'
 
-
-
-const projects = [];
-for (let i = 0; i < 100; i++ ) {
-  projects.push(<MenuItem value={i} key={i} primaryText={`${i}`} />);
-}
-
-/**
- * With the `maxHeight` property set, the Select Field will be scrollable
- * if the number of items causes the height to exceed this limit.
- */
  class CheckIn extends Component {
   state = {
     selectedHourType: null,
     selectedProject: null,
+    checkedIn: false,
+    projects: null
   };
-
-  hourType = [
-    'Work',
-    'Lazy'
-  ];
-
-  projects = [
-    'thing',
-    'thing1',
-    'thing2'
-  ];
 
   handleHourChange = (event, index, value) => this.setState({value});
 
-  handleProjectChange = (event, index, value) => this.setState({value});
+  componentWillMount(response) {
+    api.get ('/projects')
+      .then(response => {
+        this.setState({
+          projects: response.data
+        })
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  handleProjectChange = (event, index, value) => {
+    this.setState({
+      selectedProject: value
+    })
+  };
+
 
   handleCheckIn = () => {
     api({
@@ -42,32 +40,41 @@ for (let i = 0; i < 100; i++ ) {
 
       }
     })
-}
+    .then((response) => {
+      this.setState({
+        checkedIn: true
+      })
+    })
+  }
 
   render() {
+    let {projects, selectedProject} = this.state
+    if (!projects) {
+      return null
+    }
     return (
       <MuiThemeProvider>
         <div>
           <DropDownMenu
-            hintText="Select a project"
-            value={this.projects.length}
+            floatingLabelText="Select Project"
+            value={selectedProject}
             onChange={this.handleProjectChange}
-            maxHeight={200}
-          >
-          {this.projects.map((projectName, index) =>
-          <MenuItem key={index} value={index} primaryText={projectName} />
-        )}
+            >
+              {projects.map((project) =>
+                <MenuItem key={project._id} value={project._id} primaryText={project.projectName} />
+              )}
           </DropDownMenu>
           <br/>
           <DropDownMenu
-            hintText="Select an hour type"
-            value={this.hourType.length}
+            value={this.state.value}
             onChange={this.handleHourChange}
-            maxHeight={200}
+            hintText='Choose an Hour Type'
           >
-            {this.hourType.map((type, index) =>
-            <MenuItem key={index} value={index} primaryText={type} />
-          )}
+            <MenuItem value={1} primaryText="Never" />
+            <MenuItem value={2} primaryText="Every Night" />
+            <MenuItem value={3} primaryText="Weeknights" />
+            <MenuItem value={4} primaryText="Weekends" />
+            <MenuItem value={5} primaryText="Weekly" />
           </DropDownMenu>
           <br/>
           <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event,newValue) => this.setState({selectedHourType:newValue})}/>

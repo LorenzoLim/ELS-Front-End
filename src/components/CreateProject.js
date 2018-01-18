@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { api } from '../request'
-import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
+import {MuiThemeProvider, RaisedButton, TextField, DropDownMenu, MenuItem} from 'material-ui';
 class CreateProject extends Component {
   constructor(props){
     super(props);
@@ -8,7 +8,9 @@ class CreateProject extends Component {
       projectNum: '',
       projectLocation: '',
       projectName: '',
-      projectStatus: ''
+      projectStatus: '',
+      selectedUsers: [],
+      users: null
     }
   }
 
@@ -32,8 +34,28 @@ class CreateProject extends Component {
       console.log(error);
     });
   }
+  componentWillMount(response) {
+    api.get ('/users')
+      .then(response => {
+        this.setState({
+          users: response.data
+        })
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  handleUserChange = (event, index, value) => {
+    this.state.selectedUsers.push(value)
+  };
 
   render() {
+    let {selectedUsers, users} = this.state
+    if (!users) {
+      return null
+    }
     return (
       <div>
         <MuiThemeProvider>
@@ -61,6 +83,17 @@ class CreateProject extends Component {
               floatingLabelText="Project Status"
               onChange = {(event,newValue) => this.setState({projectStatus:newValue})}
             />
+            <br/>
+            <DropDownMenu
+              floatingLabelText="Select Managers"
+              value={selectedUsers}
+              onChange={this.handleUserChange}
+              multiple='true'
+              >
+                {users.map((user) =>
+                  <MenuItem key={user._id} value={user._id} primaryText={`${user.firstName} ${user.lastName}`}/>
+                )}
+            </DropDownMenu>
             <br/>
             <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject()} />
           </div>
