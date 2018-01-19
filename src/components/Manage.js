@@ -5,13 +5,11 @@ import {api} from '../request.js'
 
 class Manage extends Component {
   state = {
-//    projectNames: [],
     projects: null,
     selected: null
   };
 
   componentWillMount(response) {
-    //let projectNames = [];
     api.get ('/projects')
       .then(response => {
         this.setState({
