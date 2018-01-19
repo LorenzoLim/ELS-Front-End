@@ -1,24 +1,29 @@
 import React, {Component} from 'react'
+import Junction from './Junction'
 import { api, setJwt } from '../request'
 import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
 class SignIn extends Component {
   constructor(props){
     super(props);
-    this.state={
-    email:'',
-    password:''
+    this.state = {
+      email:'',
+      password:'',
+      role: '',
+      loggedIn: false
     }
   };
 
   handleSignIn = () => {
-    let {email, password} = this.state;
+    let {email, password, role, loggedIn} = this.state;
     api({
       method: 'post',
       url: '/auth',
       headers: {'Content-Type': 'application/json'},
       data: {
         email,
-        password
+        password,
+        role,
+        loggedIn: true
       }
     })
     .then((response) => {
@@ -28,6 +33,7 @@ class SignIn extends Component {
     .catch((error) => {
       console.log(error);
     });
+
   }
 
   render() {
@@ -51,6 +57,9 @@ class SignIn extends Component {
             <RaisedButton className="button" label="Sign-In" primary={true} onClick={this.handleSignIn}/>
           </div>
         </MuiThemeProvider>
+        {/* {
+          this.state.loggedIn && <Junction />
+        } */}
       </div>
     );
   }

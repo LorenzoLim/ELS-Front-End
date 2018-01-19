@@ -5,24 +5,29 @@ import SignIn from './components/SignIn'
 import Checkout from './components/Checkout'
 import ChangePassword from './components/ChangePassword'
 import Junction from './components/Junction'
-import Manage from './components/Manage'
 import CheckIn from './components/CheckIn'
 import SignOut from './components/SignOut'
-import CreateProject from './components/CreateProject'
-import CreateUser from './components/CreateUser'
+
+
 
 require('dotenv').config()
 
 
 class App extends Component {
   state = {
-    loggedIn: false
+    loggedIn: true
   }
   render() {
+    const {loggedIn, role, Admin} = this.state
     return (
       <div className="App">
         <img src={logo} alt="logo" />
-        <CheckIn />
+        {
+          loggedIn ? <Junction /> : <SignIn />
+        }
+
+
+
       </div>
     );
   }
