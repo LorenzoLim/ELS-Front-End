@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Junction from './Junction'
 import { api, setJwt } from '../request'
 import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
 class SignIn extends Component {

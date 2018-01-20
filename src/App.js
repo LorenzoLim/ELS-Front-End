@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router} from 'react-router-dom'
 import './App.css'
 import logo from './images/downer-logo.jpg'
 import SignIn from './components/SignIn'
@@ -8,11 +9,7 @@ import Junction from './components/Junction'
 import CheckIn from './components/CheckIn'
 import SignOut from './components/SignOut'
 
-
-
 require('dotenv').config()
-
-
 class App extends Component {
   state = {
     loggedIn: true
@@ -22,12 +19,12 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
+
+        <Router>
         {
           loggedIn ? <Junction /> : <SignIn />
         }
-
-
-
+        </Router>
       </div>
     );
   }
