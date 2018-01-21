@@ -87,18 +87,10 @@ class ProjectCard extends Component {
               <TableRowColumn>
                 {
                   projectUsers.map((user) => (
-                    user.hours.map((item) => (
-                      <span key={item._id}>{item.travel}<br /><hr /></span>
-                    ))
+                    <span key={user._id}>{user.totalHours}<br /><hr /></span>
                   )
                 )}
-
-
-
-                {/* {
-                  <span>{projectUsers[0].hours[0].travel}</span>
-                } */}
-                </TableRowColumn>
+              </TableRowColumn>
             </TableRow>
           </TableBody>
         </Table>
