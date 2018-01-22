@@ -3,25 +3,21 @@ import Manage from './Manage'
 import CreateUser from './CreateUser'
 import CreateProject from './CreateProject'
 import {MuiThemeProvider, RaisedButton} from 'material-ui';
-import {
+import {Route, withRouter, Switch} from 'react-router-dom'
+import {api} from '../request.js'
 
-  Route,
-  withRouter,
-  Switch
-} from 'react-router-dom'
 class Junction extends Component {
-
 
   state = {
     manage: false,
     newUser: false,
-    newProject: false
+    newProject: false,
+    data: null
   }
 
   componentDidMount() {
     console.log(this.props);
   }
-
   handleManage = (event) => {
     event.preventDefault
     this.props.history.push('/manage')
@@ -34,14 +30,16 @@ class Junction extends Component {
     event.preventDefault
     this.props.history.push('/newproject')
   }
+
   render() {
     return (
+
       <div>
         <MuiThemeProvider>
           <div>
             <RaisedButton className="button" label="Manage" primary={true}  onClick={(event) => this.handleManage(event)}/>
 
-            <RaisedButton className="button" label="View Final Report" primary={true} onClick={(event) => this.handleClick(event)}/>
+            <RaisedButton className="button" label="Export" primary={true} href={`${process.env.REACT_APP_API_URL}report.csv`} target="_blank"/>
 
             <RaisedButton className="button" label="Create New Manager" primary={true} onClick={(event) => this.handleNewUser(event)}/>
 
