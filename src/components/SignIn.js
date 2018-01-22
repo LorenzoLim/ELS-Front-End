@@ -21,13 +21,15 @@ class SignIn extends Component {
       data: {
         email,
         password,
-        role,
-        loggedIn: true
+        role
       }
     })
     .then((response) => {
       console.log(response);
       setJwt(response.data.token)
+      this.setState({
+        loggedIn: true
+      })
     })
     .catch((error) => {
       console.log(error);
@@ -56,9 +58,6 @@ class SignIn extends Component {
             <RaisedButton className="button" label="Sign-In" primary={true} onClick={this.handleSignIn}/>
           </div>
         </MuiThemeProvider>
-        {/* {
-          this.state.loggedIn && <Junction />
-        } */}
       </div>
     );
   }

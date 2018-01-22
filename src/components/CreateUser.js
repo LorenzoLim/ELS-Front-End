@@ -2,22 +2,21 @@ import React, {Component} from 'react'
 import { api } from '../request'
 import {MuiThemeProvider, RaisedButton, TextField, Toggle} from 'material-ui';
 class CreateUser extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
+    state = {
       firstName: '',
       lastName: '',
       email: '',
       password:'',
-      role:'manager'
+      role:'manager',
+      success: false
     }
-   }
 
    handleCreateUser = (event) => {
      let {firstName, lastName, email, password, role} = this.state;
+
      api ({
        method: 'post',
-       url: '/users',
+       url: '/auth/register',
        headers: {'Content-Type': 'application/json'},
        data: {
         firstName,
@@ -29,24 +28,34 @@ class CreateUser extends Component {
      })
      .then((response) => {
        console.log(response);
+       if (response.status === 200) {
+         this.setState({
+           success: true
+         })
+       }
      })
+
      .catch((error) => {
        console.log(error);
      });
    }
 
-   toggleUserRole = (event) => {
-     this.setState((prevState) => {
-       return {
-         role: prevState.role === 'admin' ? 'manager' : 'admin'
-       }
-     })
-   }
+    toggleUserRole = (event) => {
+      this.setState((prevState) => {
+        return {
+          role: prevState.role === 'admin' ? 'manager' : 'admin'
+        }
+      })
+    }
 
  render() {
     return (
       <div>
+        {
+          this.state.success ? <p> Thank you </p> :
+
         <MuiThemeProvider>
+
           <div>
             <TextField
              hintText="Enter User's First Name"
@@ -81,6 +90,7 @@ class CreateUser extends Component {
             <RaisedButton className="button" label="Create User" primary={true} onClick={this.handleCreateUser}/>
           </div>
         </MuiThemeProvider>
+        }
       </div>
     );
   }

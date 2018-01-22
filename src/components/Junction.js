@@ -30,10 +30,10 @@ componentDidMount() {
    event.preventDefault
    this.props.history.push('/newmanager')
  }
- handleNewProject = (event => {
+ handleNewProject = (event) => {
    event.preventDefault
    this.props.history.push('/newproject')
- })
+ }
 render() {
     return (
       <div>
@@ -54,7 +54,6 @@ render() {
             <Route path="/newmanager" component={CreateUser} />
             <Route path="/newproject" component={CreateProject} />
           </Switch>
-
         </div>
     );
   }
