@@ -9,14 +9,13 @@ class CreateProject extends Component {
       projectLocation: '',
       projectName: '',
       projectStatus: '',
-      selectedUsers: [],
       users: null,
       values: []
     }
   }
 
   handleCreateProject = () => {
-    let {projectNum, projectLocation, projectName, projectStatus, selectedUsers} = this.state;
+    let {projectNum, projectLocation, projectName, projectStatus, values} = this.state;
     api({
       method: 'post',
       url: '/projects',
@@ -26,7 +25,7 @@ class CreateProject extends Component {
         projectLocation,
         projectName,
         projectStatus,
-        projectUsers: selectedUsers
+        projectUsers: values
       }
     })
     .then((response) => {
@@ -48,24 +47,21 @@ class CreateProject extends Component {
       });
   }
 
-  handleChange = (event, index, values) => {
-    this.setState({
-      values: [...this.state.values , values]
-    });
-  }
 
-  menuItems(values) {
-    let {users, selectedUsers} = this.state
-    return users.map((user) => (
-      <MenuItem
-        key={`${user.firstName} ${user.lastName}`}
-        insetChildren={true}
-        checked={values && values.indexOf(user) > -1}
-        value={user}
-        primaryText={`${user.firstName} ${user.lastName}`}
-      />
-    ));
-  }
+    handleChange = (event, index, values) => this.setState({values});
+
+    menuItems(values) {
+      let {users} = this.state
+      return users.map((user) => (
+        <MenuItem
+          key={`${user.firstName} ${user.lastName}`}
+          insetChildren={true}
+          checked={values && values.indexOf(user) > -1}
+          value={user._id}
+          primaryText={`${user.firstName} ${user.lastName}`}
+        />
+      ));
+    }
 
   render() {
     let {selectedUsers, users, values} = this.state
@@ -111,7 +107,7 @@ class CreateProject extends Component {
             >
               {this.menuItems(selectedUsers)}
             </DropDownMenu>
-            {console.log(selectedUsers)}
+            {console.log(values)}
             <br/>
             <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject()} />
           </div>
