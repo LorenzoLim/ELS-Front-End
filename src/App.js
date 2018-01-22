@@ -6,9 +6,10 @@ import Junction from './components/Junction'
 import CheckIn from './components/CheckIn'
 import { api, setJwt } from './request'
 import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
-var injectTapEventPlugin = require("react-tap-event-plugin");
+import {BrowserRouter as Router} from 'react-router-dom';
 
-injectTapEventPlugin();
+import Moment from './components/Moment'
+
 require('dotenv').config()
 
 
@@ -53,6 +54,7 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
+        <Router>
         {
           loggedIn ? (role.toLowerCase() === 'admin' ? <Junction /> : <CheckIn />) :
           (
@@ -78,6 +80,7 @@ class App extends Component {
             </div>
           )
         }
+      </Router>
       </div>
     );
   }
