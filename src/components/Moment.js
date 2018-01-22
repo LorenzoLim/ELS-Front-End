@@ -1,7 +1,5 @@
 import React from 'react';
-import Moment from 'react-moment';
 import moment from 'moment';
-import 'moment-timezone';
 
 
 export default class App extends React.Component {
@@ -14,13 +12,13 @@ state = {
 
 startTimer = () => {
 	this.setState({
-		start: new Date()
+		start: moment()
 	})
 }
 
 stopTimer = () => {
 	this.setState({
-		stop: new Date()
+		stop: moment()
 	})
 }
 
@@ -28,7 +26,7 @@ stopTimer = () => {
 		return (
 			<div className="App">
      { this.state.start && this.state.stop &&
-          <p>Total time: {(this.state.stop - this.state.start) / 1000 /60 /60} </p>
+          <p>Total time: {this.state.stop.diff(this.state.start, 'hours')} </p>
         }
         <p>{this.state.total}</p>
         <button onClick={this.startTimer}>Start Timer</button>
@@ -39,4 +37,3 @@ stopTimer = () => {
     );
   }
 }
-

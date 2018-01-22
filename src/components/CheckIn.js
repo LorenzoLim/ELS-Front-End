@@ -46,6 +46,10 @@ import {api} from '../request'
     })
   }
 
+  handleSignOut = () => {
+    sessionStorage.removeItem('token')
+  }
+
   render() {
     let {projects, selectedProject} = this.state
     if (!projects) {
@@ -92,6 +96,7 @@ import {api} from '../request'
           <br/>
           <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event,newValue) => this.setState({selectedHourType:newValue})}/>
         </div>
+        <RaisedButton className="button"label="SignOut" primary={true} onClick={this.handleSignOut}/>
       </MuiThemeProvider>
     );
   }

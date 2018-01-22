@@ -5,7 +5,7 @@ const api = axios.create({
 })
 
 const setJwt = (token) => {
-  localStorage.setItem('token', token)
+  sessionStorage.setItem('token', token)
   api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 };
 

@@ -3,17 +3,13 @@ import {MuiThemeProvider, RaisedButton} from 'material-ui';
 class SignOut extends Component {
 constructor(props){
   super(props);
-  this.state={
-  username:'',
-  password:''
-  }
- }
+
 render() {
     return (
       <div>
         <MuiThemeProvider>
           <div>
-             <RaisedButton className="button"label="SignOut" primary={true} onClick={(event) => this.handleClick(event)}/>
+             <RaisedButton className="button"label="SignOut" primary={true} onClick={localStorage.removeItem('token')}/>
          </div>
          </MuiThemeProvider>
       </div>
