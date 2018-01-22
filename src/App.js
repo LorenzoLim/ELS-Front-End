@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import './App.css'
 import logo from './images/downer-logo.jpg'
-import CheckOut from './components/CheckOut'
 import ChangePassword from './components/ChangePassword'
 import Junction from './components/Junction'
-import Manage from './components/Manage'
 import CheckIn from './components/CheckIn'
-import SignOut from './components/SignOut'
-import CreateProject from './components/CreateProject'
-import CreateUser from './components/CreateUser'
 import { api, setJwt } from './request'
 import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
 var injectTapEventPlugin = require("react-tap-event-plugin");

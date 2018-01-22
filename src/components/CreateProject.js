@@ -10,12 +10,13 @@ class CreateProject extends Component {
       projectName: '',
       projectStatus: '',
       selectedUsers: [],
-      users: null
+      users: null,
+      values: []
     }
   }
 
   handleCreateProject = () => {
-    let {projectNum, projectLocation, projectName, projectStatus} = this.state;
+    let {projectNum, projectLocation, projectName, projectStatus, selectedUsers} = this.state;
     api({
       method: 'post',
       url: '/projects',
@@ -24,7 +25,8 @@ class CreateProject extends Component {
         projectNum,
         projectLocation,
         projectName,
-        projectStatus
+        projectStatus,
+        projectUsers: selectedUsers
       }
     })
     .then((response) => {
@@ -40,20 +42,37 @@ class CreateProject extends Component {
         this.setState({
           users: response.data
         })
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  handleUserChange = (event, index, value) => {
-    this.state.selectedUsers.push(value)
-  };
+  handleChange = (event, index, values) => {
+    this.setState({
+      values: [...this.state.values , values]
+    });
+  }
+
+  menuItems(values) {
+    let {users, selectedUsers} = this.state
+    return users.map((user) => (
+      <MenuItem
+        key={`${user.firstName} ${user.lastName}`}
+        insetChildren={true}
+        checked={values && values.indexOf(user) > -1}
+        value={user}
+        primaryText={`${user.firstName} ${user.lastName}`}
+      />
+    ));
+  }
 
   render() {
-    let {selectedUsers, users} = this.state
+    let {selectedUsers, users, values} = this.state
     if (!users) {
+      return null
+    }
+    if (!values) {
       return null
     }
     return (
@@ -85,15 +104,14 @@ class CreateProject extends Component {
             />
             <br/>
             <DropDownMenu
-              floatingLabelText="Select Managers"
-              value={selectedUsers}
-              onChange={this.handleUserChange}
-              multiple='true'
-              >
-                {users.map((user) =>
-                  <MenuItem key={user._id} value={user._id} primaryText={`${user.firstName} ${user.lastName}`}/>
-                )}
+              multiple={true}
+              hintText="Select Managers"
+              value={values}
+              onChange={this.handleChange}
+            >
+              {this.menuItems(selectedUsers)}
             </DropDownMenu>
+            {console.log(selectedUsers)}
             <br/>
             <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject()} />
           </div>

@@ -18,7 +18,6 @@ import {api} from '../request'
         this.setState({
           projects: response.data
         })
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -52,6 +51,9 @@ import {api} from '../request'
     if (!projects) {
       return null
     }
+    if (!selectedProject) {
+      return null
+    }
     return (
       <MuiThemeProvider>
         <div>
@@ -70,11 +72,22 @@ import {api} from '../request'
             onChange={this.handleHourChange}
             hintText='Choose an Hour Type'
           >
-            <MenuItem value={1} primaryText="Never" />
-            <MenuItem value={2} primaryText="Every Night" />
-            <MenuItem value={3} primaryText="Weeknights" />
-            <MenuItem value={4} primaryText="Weekends" />
-            <MenuItem value={5} primaryText="Weekly" />
+            <MenuItem value={1} primaryText="Project" />
+            <MenuItem value={2} primaryText="Business Support - Business Development" />
+            <MenuItem value={3} primaryText="Business Support - Commercial" />
+            <MenuItem value={4} primaryText="Business Support - Equipment Optimization" />
+            <MenuItem value={5} primaryText="Business Support - Maintenance" />
+            <MenuItem value={6} primaryText="Business Support - Manufacturing" />
+            <MenuItem value={7} primaryText="Business Support - Operations" />
+            <MenuItem value={8} primaryText="Business Support - Technical Services" />
+            <MenuItem value={9} primaryText="Business Support - Zero Harm" />
+            <MenuItem value={10} primaryText="Other - Administration" />
+            <MenuItem value={11} primaryText="Other - Attending Site" />
+            <MenuItem value={12} primaryText="Other - Audit" />
+            <MenuItem value={13} primaryText="Other - Information Technology" />
+            <MenuItem value={14} primaryText="Other - Meetings" />
+            <MenuItem value={15} primaryText="Other - Training" />
+            <MenuItem value={16} primaryText="Other - Travel" />
           </DropDownMenu>
           <br/>
           <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event,newValue) => this.setState({selectedHourType:newValue})}/>
