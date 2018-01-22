@@ -51,9 +51,7 @@ import {api} from '../request'
     if (!projects) {
       return null
     }
-    if (!selectedProject) {
-      return null
-    }
+  
     return (
       <MuiThemeProvider>
         <div>
