@@ -10,7 +10,8 @@ class CreateProject extends Component {
       projectName: '',
       projectStatus: '',
       users: null,
-      values: []
+      values: [],
+      success: false
     }
   }
 
@@ -30,6 +31,9 @@ class CreateProject extends Component {
     })
     .then((response) => {
       console.log(response);
+      this.setState({
+        success: true
+      })
     })
     .catch((error) => {
       console.log(error);
@@ -73,45 +77,48 @@ class CreateProject extends Component {
     }
     return (
       <div>
-        <MuiThemeProvider>
-          <div>
-            <TextField
-              hintText="Enter Project Number"
-              floatingLabelText="Project Number"
-              onChange = {(event,newValue) => this.setState({projectNum:newValue})}
-            />
-            <br/>
-            <TextField
-              hintText="Enter Project Name"
-              floatingLabelText="Project Name"
-              onChange = {(event,newValue) => this.setState({projectName:newValue})}
-            />
-            <br/>
-            <TextField
-              hintText="Enter Project Location"
-              floatingLabelText="Project Location"
-              onChange = {(event,newValue) => this.setState({projectLocation:newValue})}
-            />
-            <br/>
-            <TextField
-              hintText="Enter Project Status"
-              floatingLabelText="Project Status"
-              onChange = {(event,newValue) => this.setState({projectStatus:newValue})}
-            />
-            <br/>
-            <DropDownMenu
-              multiple={true}
-              hintText="Select Managers"
-              value={values}
-              onChange={this.handleChange}
-            >
-              {this.menuItems(selectedUsers)}
-            </DropDownMenu>
-            {console.log(values)}
-            <br/>
-            <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject()} />
-          </div>
-        </MuiThemeProvider>
+        {
+          this.state.success ? <p> You made a project</p> :
+          <MuiThemeProvider>
+            <div>
+              <TextField
+                hintText="Enter Project Number"
+                floatingLabelText="Project Number"
+                onChange = {(event,newValue) => this.setState({projectNum:newValue})}
+              />
+              <br/>
+              <TextField
+                hintText="Enter Project Name"
+                floatingLabelText="Project Name"
+                onChange = {(event,newValue) => this.setState({projectName:newValue})}
+              />
+              <br/>
+              <TextField
+                hintText="Enter Project Location"
+                floatingLabelText="Project Location"
+                onChange = {(event,newValue) => this.setState({projectLocation:newValue})}
+              />
+              <br/>
+              <TextField
+                hintText="Enter Project Status"
+                floatingLabelText="Project Status"
+                onChange = {(event,newValue) => this.setState({projectStatus:newValue})}
+              />
+              <br/>
+              <DropDownMenu
+                multiple={true}
+                hintText="Select Managers"
+                value={values}
+                onChange={this.handleChange}
+              >
+                {this.menuItems(selectedUsers)}
+              </DropDownMenu>
+              {console.log(values)}
+              <br/>
+              <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject()} />
+            </div>
+          </MuiThemeProvider>
+        }
       </div>
     );
   }
