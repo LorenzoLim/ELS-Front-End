@@ -1,47 +1,96 @@
 import React, {Component} from 'react';
-import {MuiThemeProvider, SelectField, MenuItem, RaisedButton} from 'material-ui';
+import {MuiThemeProvider, MenuItem, RaisedButton, DropDownMenu} from 'material-ui';
+import {api} from '../request'
 
-
-
-const projects = [];
-for (let i = 0; i < 100; i++ ) {
-  projects.push(<MenuItem value={i} key={i} primaryText={`${i}`} />);
-}
-
-/**
- * With the `maxHeight` property set, the Select Field will be scrollable
- * if the number of items causes the height to exceed this limit.
- */
  class CheckIn extends Component {
   state = {
-    value: 10,
+    selectedHourType: null,
+    selectedProject: null,
+    checkedIn: false,
+    projects: null
   };
 
-  handleChange = (event, index, value) => {
-    this.setState({value});
+  handleHourChange = (event, index, value) => this.setState({value});
+
+  componentWillMount(response) {
+    api.get ('/projects')
+      .then(response => {
+        this.setState({
+          projects: response.data
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  handleProjectChange = (event, index, value) => {
+    this.setState({
+      selectedProject: value
+    })
   };
+
+
+  handleCheckIn = () => {
+    api({
+      method: 'post',
+      url: '/hours',
+      data: {
+
+      }
+    })
+    .then((response) => {
+      this.setState({
+        checkedIn: true
+      })
+    })
+  }
 
   render() {
+    let {projects, selectedProject} = this.state
+    if (!projects) {
+      return null
+    }
+    if (!selectedProject) {
+      return null
+    }
     return (
       <MuiThemeProvider>
         <div>
-          <SelectField
-            value={this.state.value}
-            onChange={this.handleChange}
-            maxHeight={200}
-          >
-            {projects}
-          </SelectField>
+          <DropDownMenu
+            floatingLabelText="Select Project"
+            value={selectedProject}
+            onChange={this.handleProjectChange}
+            >
+              {projects.map((project) =>
+                <MenuItem key={project._id} value={project._id} primaryText={project.projectName} />
+              )}
+          </DropDownMenu>
           <br/>
-          <SelectField
+          <DropDownMenu
             value={this.state.value}
-            onChange={this.handleChange}
-            maxHeight={200}
+            onChange={this.handleHourChange}
+            hintText='Choose an Hour Type'
           >
-            {projects}
-          </SelectField>
+            <MenuItem value={1} primaryText="Project" />
+            <MenuItem value={2} primaryText="Business Support - Business Development" />
+            <MenuItem value={3} primaryText="Business Support - Commercial" />
+            <MenuItem value={4} primaryText="Business Support - Equipment Optimization" />
+            <MenuItem value={5} primaryText="Business Support - Maintenance" />
+            <MenuItem value={6} primaryText="Business Support - Manufacturing" />
+            <MenuItem value={7} primaryText="Business Support - Operations" />
+            <MenuItem value={8} primaryText="Business Support - Technical Services" />
+            <MenuItem value={9} primaryText="Business Support - Zero Harm" />
+            <MenuItem value={10} primaryText="Other - Administration" />
+            <MenuItem value={11} primaryText="Other - Attending Site" />
+            <MenuItem value={12} primaryText="Other - Audit" />
+            <MenuItem value={13} primaryText="Other - Information Technology" />
+            <MenuItem value={14} primaryText="Other - Meetings" />
+            <MenuItem value={15} primaryText="Other - Training" />
+            <MenuItem value={16} primaryText="Other - Travel" />
+          </DropDownMenu>
           <br/>
-          <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event) => this.handleClick(event)}/>
+          <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event,newValue) => this.setState({selectedHourType:newValue})}/>
         </div>
       </MuiThemeProvider>
     );
