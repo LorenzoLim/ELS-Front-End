@@ -41,15 +41,16 @@ class ProjectCard extends Component {
           projectStatus: data.projectStatus,
           projectUsers: data.projectUsers
         })
-
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
+
   }
 
   render() {
     const {projectLocation, projectStatus, projectNum, projectUsers} = this.state
+
     if (!projectUsers) {
       return null;
     }
@@ -77,7 +78,7 @@ class ProjectCard extends Component {
               <TableRowColumn>
                 {
                   projectUsers.map((user) => (
-                    <span>{user.firstName} {user.lastName} <br /></span>
+                    <span key={user._id}>{user.firstName} {user.lastName} <br /><hr /></span>
                   )
                 )}
               </TableRowColumn>
@@ -85,11 +86,11 @@ class ProjectCard extends Component {
               <TableRowColumn>{projectStatus}</TableRowColumn>
               <TableRowColumn>
                 {
-                  projectUsers.map((user) => {
-                    <span>{user.hours} </span>
-                  })
-                }
-                </TableRowColumn>
+                  projectUsers.map((user) => (
+                    <span key={user._id}>{user.totalHours}<br /><hr /></span>
+                  )
+                )}
+              </TableRowColumn>
             </TableRow>
           </TableBody>
         </Table>
