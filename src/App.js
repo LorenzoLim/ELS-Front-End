@@ -80,12 +80,7 @@ class App extends Component {
             </div>
           )
         }
-<<<<<<< HEAD
-
         </Router>
-=======
-      </Router>
->>>>>>> master
       </div>
     );
   }
