@@ -37,7 +37,10 @@ componentDidMount() {
 render() {
     return (
       <div>
-        <MuiThemeProvider>
+        {destination === 'manage' && (<Manage />)}
+        {destination === 'createUser' && <CreateUser />}
+        {destination === 'createProject' && <CreateProject />}
+        {destination === '' && (
           <div>
             <RaisedButton className="button" label="Manage" primary={true}  onClick={(event) => this.handleManage(event)}/>
 

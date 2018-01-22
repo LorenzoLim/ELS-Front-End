@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { api } from '../request'
-import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
+import {MuiThemeProvider, RaisedButton, TextField, DropDownMenu, MenuItem} from 'material-ui';
 class CreateProject extends Component {
   constructor(props){
     super(props);
@@ -8,12 +8,14 @@ class CreateProject extends Component {
       projectNum: '',
       projectLocation: '',
       projectName: '',
-      projectStatus: ''
+      projectStatus: '',
+      users: null,
+      values: []
     }
   }
 
   handleCreateProject = () => {
-    let {projectNum, projectLocation, projectName, projectStatus} = this.state;
+    let {projectNum, projectLocation, projectName, projectStatus, values} = this.state;
     api({
       method: 'post',
       url: '/projects',
@@ -22,7 +24,8 @@ class CreateProject extends Component {
         projectNum,
         projectLocation,
         projectName,
-        projectStatus
+        projectStatus,
+        projectUsers: values
       }
     })
     .then((response) => {
@@ -32,8 +35,42 @@ class CreateProject extends Component {
       console.log(error);
     });
   }
+  componentWillMount(response) {
+    api.get ('/users')
+      .then(response => {
+        this.setState({
+          users: response.data
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+    handleChange = (event, index, values) => this.setState({values});
+
+    menuItems(values) {
+      let {users} = this.state
+      return users.map((user) => (
+        <MenuItem
+          key={`${user.firstName} ${user.lastName}`}
+          insetChildren={true}
+          checked={values && values.indexOf(user) > -1}
+          value={user._id}
+          primaryText={`${user.firstName} ${user.lastName}`}
+        />
+      ));
+    }
 
   render() {
+    let {selectedUsers, users, values} = this.state
+    if (!users) {
+      return null
+    }
+    if (!values) {
+      return null
+    }
     return (
       <div>
         <MuiThemeProvider>
@@ -61,6 +98,16 @@ class CreateProject extends Component {
               floatingLabelText="Project Status"
               onChange = {(event,newValue) => this.setState({projectStatus:newValue})}
             />
+            <br/>
+            <DropDownMenu
+              multiple={true}
+              hintText="Select Managers"
+              value={values}
+              onChange={this.handleChange}
+            >
+              {this.menuItems(selectedUsers)}
+            </DropDownMenu>
+            {console.log(values)}
             <br/>
             <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject()} />
           </div>
