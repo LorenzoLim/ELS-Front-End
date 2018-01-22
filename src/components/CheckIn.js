@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {MuiThemeProvider, MenuItem, RaisedButton, DropDownMenu} from 'material-ui';
+import {MuiThemeProvider, MenuItem, RaisedButton, DropDownMenu, SelectField} from 'material-ui';
 import {api} from '../request'
 
  class CheckIn extends Component {
@@ -51,24 +51,24 @@ import {api} from '../request'
     if (!projects) {
       return null
     }
-  
+
     return (
       <MuiThemeProvider>
         <div>
-          <DropDownMenu
-            floatingLabelText="Select Project"
+          <SelectField
             value={selectedProject}
             onChange={this.handleProjectChange}
+            floatingLabelText='Select Project'
             >
               {projects.map((project) =>
                 <MenuItem key={project._id} value={project._id} primaryText={project.projectName} />
               )}
-          </DropDownMenu>
+          </SelectField>
           <br/>
-          <DropDownMenu
+          <SelectField
             value={this.state.value}
             onChange={this.handleHourChange}
-            hintText='Choose an Hour Type'
+            floatingLabelText='Select Type'
           >
             <MenuItem value={1} primaryText="Project" />
             <MenuItem value={2} primaryText="Business Support - Business Development" />
@@ -86,7 +86,7 @@ import {api} from '../request'
             <MenuItem value={14} primaryText="Other - Meetings" />
             <MenuItem value={15} primaryText="Other - Training" />
             <MenuItem value={16} primaryText="Other - Travel" />
-          </DropDownMenu>
+          </SelectField>
           <br/>
           <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event,newValue) => this.setState({selectedHourType:newValue})}/>
         </div>
