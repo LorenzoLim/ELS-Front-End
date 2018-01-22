@@ -8,6 +8,8 @@ import { api, setJwt } from './request'
 import {MuiThemeProvider, RaisedButton, TextField} from 'material-ui';
 import {BrowserRouter as Router} from 'react-router-dom';
 
+import Moment from './components/Moment'
+
 require('dotenv').config()
 
 
