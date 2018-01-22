@@ -58,7 +58,7 @@ import {api} from '../request'
           <SelectField
             value={selectedProject}
             onChange={this.handleProjectChange}
-            floatingLabelText='Select Project'
+            hintText='Select Project '
             >
               {projects.map((project) =>
                 <MenuItem key={project._id} value={project._id} primaryText={project.projectName} />
@@ -68,7 +68,7 @@ import {api} from '../request'
           <SelectField
             value={this.state.value}
             onChange={this.handleHourChange}
-            floatingLabelText='Select Type'
+            hintText='Select Type '
           >
             <MenuItem value={1} primaryText="Project" />
             <MenuItem value={2} primaryText="Business Support - Business Development" />
