@@ -22,10 +22,12 @@ class Junction extends Component {
     event.preventDefault
     this.props.history.push('/manage')
   }
+
   handleNewUser = (event) => {
     event.preventDefault
     this.props.history.push('/newmanager')
   }
+
   handleNewProject = (event) => {
     event.preventDefault
     this.props.history.push('/newproject')
