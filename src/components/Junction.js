@@ -4,7 +4,6 @@ import CreateUser from './CreateUser'
 import CreateProject from './CreateProject'
 import {MuiThemeProvider, RaisedButton} from 'material-ui';
 import {Route, withRouter, Switch} from 'react-router-dom'
-import {api} from '../request.js'
 
 class Junction extends Component {
 
