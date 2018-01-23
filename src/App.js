@@ -15,10 +15,10 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-    token: sessionStorage.getItem("token"),
+    token: localStorage.getItem("token"),
     email: null,
     password: null,
-    role: ''
+    role: null
     }
   };
 
@@ -47,7 +47,7 @@ class App extends Component {
   }
 
   handleSignOut = () => {
-    sessionStorage.removeItem('token')
+    localStorage.removeItem('token')
     this.setState({
       token: null
     })
@@ -95,6 +95,14 @@ class App extends Component {
           }
       </div>
     );
+  }
+  componentDidMount = () => {
+    if (localStorage.getItem("token")){
+      let decoded = jwt.verify(localStorage.getItem("token"), `${process.env.REACT_APP_JWT_SECRET}`)
+      this.setState({
+        role: decoded.role
+      })
+    }
   }
 }
 

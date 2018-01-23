@@ -4,7 +4,8 @@ import CreateUser from './CreateUser'
 import CreateProject from './CreateProject'
 import {MuiThemeProvider, RaisedButton} from 'material-ui';
 import {Route, withRouter, Switch} from 'react-router-dom'
-import {api} from '../request.js'
+
+require('dotenv').config()
 
 class Junction extends Component {
 
@@ -33,6 +34,11 @@ class Junction extends Component {
     this.props.history.push('/newproject')
   }
 
+  handleCSVExport = (event) => {
+    event.preventDefault
+    window.open(`${process.env.REACT_APP_API_URL}report.csv`, "_blank")
+  }
+
   render() {
     return (
 
@@ -41,7 +47,7 @@ class Junction extends Component {
           <div>
             <RaisedButton className="button" label="Manage" primary={true}  onClick={(event) => this.handleManage(event)}/>
 
-            <RaisedButton className="button" label="Export" primary={true} href={`${process.env.REACT_APP_API_URL}report.csv`} target="_blank"/>
+            <RaisedButton className="button" label="Export" primary={true} onClick={(event) => this.handleCSVExport(event)}/>
 
             <RaisedButton className="button" label="Create New Manager" primary={true} onClick={(event) => this.handleNewUser(event)}/>
 
