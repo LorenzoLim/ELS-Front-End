@@ -16,11 +16,7 @@ import {api} from '../request';
   	totalTime: 0
   };
 
-  handleHourChange = (event, index, value) => {
-    this.setState({
-      selectedHourType: value
-    });
-  }
+
   componentWillMount(response) {
     api.get ('/projects')
       .then(response => {
@@ -41,6 +37,12 @@ import {api} from '../request';
       console.log(error);
     })
   }
+
+  handleHourChange = (event, index, value) => {
+    this.setState({
+      selectedHourType: value
+    })
+  };
 
   handleProjectChange = (event, index, value) => {
     this.setState({
@@ -117,7 +119,7 @@ import {api} from '../request';
           >
             {
               hourType.map((hour) =>
-                <MenuItem key={hour._id} value={hour._id} primaryText={hour.type} />
+                <MenuItem key={hour._id} value={hour.type} primaryText={hour.type} />
             )}
           </SelectField>
           <br/>
