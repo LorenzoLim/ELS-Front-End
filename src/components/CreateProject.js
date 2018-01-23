@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { api } from '../request'
-import {MuiThemeProvider, RaisedButton, TextField, DropDownMenu, MenuItem} from 'material-ui';
+import {MuiThemeProvider, RaisedButton, TextField, SelectField, MenuItem} from 'material-ui';
 class CreateProject extends Component {
   constructor(props){
     super(props);
@@ -105,14 +105,14 @@ class CreateProject extends Component {
                 onChange = {(event,newValue) => this.setState({projectStatus:newValue})}
               />
               <br/>
-              <DropDownMenu
+              <SelectField
                 multiple={true}
                 hintText="Select Managers"
                 value={values}
                 onChange={this.handleChange}
               >
                 {this.menuItems(selectedUsers)}
-              </DropDownMenu>
+              </SelectField>
               {console.log(values)}
               <br/>
               <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject()} />
