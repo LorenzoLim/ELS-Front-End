@@ -40,7 +40,6 @@ class App extends Component {
         token: response.data.token,
         role: decoded.role
       })
-      console.log(this.state.role)
     })
     .catch((error) => {
       console.log(error);

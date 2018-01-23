@@ -28,9 +28,18 @@ import {api} from '../request';
           projects: response.data
         })
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
+    api.get ('/hours')
+    .then(response => {
+      this.setState({
+        hourType: response.data
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   handleProjectChange = (event, index, value) => {
@@ -38,21 +47,6 @@ import {api} from '../request';
       selectedProject: value
     })
   };
-
-  handleCheckIn = () => {
-    api({
-      method: 'post',
-      url: '/hours',
-      data: {
-
-      }
-    })
-    .then((response) => {
-      this.setState({
-        checkedIn: true
-      })
-    })
-  }
 
   handleSignOut = () => {
     sessionStorage.removeItem('token')
@@ -75,10 +69,9 @@ import {api} from '../request';
       selectedHourType
     })
     api({
-      method: 'post',
+      method: 'patch',
       url: '/hours',
       data: {
-        stopTime,
         totalTime,
         selectedProject,
         selectedHourType
@@ -94,10 +87,10 @@ import {api} from '../request';
 
   render() {
     let {projects, selectedProject, working, startTime, stopTime, totalTime, selectedHourType, hourType} = this.state
-    if (!projects) {
+    if (!projects || !hourType) {
       return null
     }
-      console.log(totalTime);
+      console.log(hourType);
       console.log(selectedProject);
       console.log(this.state.selectedHourType);
     return (
@@ -122,27 +115,10 @@ import {api} from '../request';
             onChange={this.handleHourChange}
             hintText='Select Type '
           >
-            {/* {
+            {
               hourType.map((hour) =>
-                <MenuItem key={hour._id} value={hour._id} primaryText={hour.} />
-
-            )} */}
-            <MenuItem value={1} primaryText="Project" />
-            <MenuItem value={2} primaryText="Business Support - Business Development" />
-            <MenuItem value={3} primaryText="Business Support - Commercial" />
-            <MenuItem value={4} primaryText="Business Support - Equipment Optimization" />
-            <MenuItem value={5} primaryText="Business Support - Maintenance" />
-            <MenuItem value={6} primaryText="Business Support - Manufacturing" />
-            <MenuItem value={7} primaryText="Business Support - Operations" />
-            <MenuItem value={8} primaryText="Business Support - Technical Services" />
-            <MenuItem value={9} primaryText="Business Support - Zero Harm" />
-            <MenuItem value={10} primaryText="Other - Administration" />
-            <MenuItem value={11} primaryText="Other - Attending Site" />
-            <MenuItem value={12} primaryText="Other - Audit" />
-            <MenuItem value={13} primaryText="Other - Information Technology" />
-            <MenuItem value={14} primaryText="Other - Meetings" />
-            <MenuItem value={15} primaryText="Other - Training" />
-            <MenuItem value={16} primaryText="Other - Travel" />
+                <MenuItem key={hour._id} value={hour._id} primaryText={hour.type} />
+            )}
           </SelectField>
           <br/>
           {
