@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-import {MuiThemeProvider, MenuItem, RaisedButton, SelectField} from 'material-ui';
 import {api} from '../request';
+import {MuiThemeProvider, MenuItem, RaisedButton, SelectField} from 'material-ui';
+const jwt = require('jsonwebtoken');
 
  class CheckIn extends Component {
+
   state = {
+    userEmail: null,
     selectedHourType: null,
     selectedProject: null,
     checkedIn: false,
@@ -13,6 +16,7 @@ import {api} from '../request';
     working: false,
     startTime: null,
   	stopTime: null,
+    showTime: null,
   	totalTime: 0
   };
 
@@ -62,10 +66,13 @@ import {api} from '../request';
   }
 
   stopTimer = () => {
-    let {startTime, selectedProject, selectedHourType, totalTime, stopTime} = this.state
+    let {startTime, selectedProject, selectedHourType, totalTime, stopTime, userEmail} = this.state
+    let decoded = jwt.verify(localStorage.getItem("token"), `${process.env.REACT_APP_JWT_SECRET}`)
   	this.setState({
-      stopTime: moment(),
+      userEmail: decoded.email,
+      stopTime: moment().toNow(),
       totalTime: moment().diff(startTime, 'hours', true),
+      showTime: totalTime,
       working: false,
       selectedProject,
       selectedHourType
@@ -74,6 +81,7 @@ import {api} from '../request';
       method: 'patch',
       url: '/hours',
       data: {
+        userEmail,
         totalTime,
         selectedProject,
         selectedHourType
@@ -88,18 +96,16 @@ import {api} from '../request';
   }
 
   render() {
-    let {projects, selectedProject, working, startTime, stopTime, totalTime, selectedHourType, hourType} = this.state
+    let {projects, selectedProject, working, startTime, stopTime, totalTime, selectedHourType, hourType, showTime} = this.state
     if (!projects || !hourType) {
       return null
     }
-      console.log(hourType);
-      console.log(selectedProject);
-      console.log(this.state.selectedHourType);
+
     return (
       <MuiThemeProvider>
         <div>
             { startTime && stopTime &&
-               <p>Total time: {totalTime} minute/s</p>
+               <p>Total time: {stopTime}</p>
              }
 
           <SelectField
