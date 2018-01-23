@@ -40,7 +40,6 @@ class App extends Component {
         token: response.data.token,
         role: decoded.role
       })
-      console.log(this.state.role)
     })
     .catch((error) => {
       console.log(error);
@@ -59,6 +58,7 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
+
           <Router>
           {
             token ? (role === 'admin' ? <Junction /> : <CheckIn />) :
