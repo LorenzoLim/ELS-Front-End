@@ -18,7 +18,8 @@ class App extends Component {
     token: localStorage.getItem("token"),
     email: null,
     password: null,
-    role: null
+    role: null,
+    userId: null
     }
   };
 
@@ -38,7 +39,9 @@ class App extends Component {
       let decoded = jwt.verify(response.data.token, `${process.env.REACT_APP_JWT_SECRET}`)
       this.setState({
         token: response.data.token,
-        role: decoded.role
+        role: decoded.role,
+        email: decoded.email,
+        userId: decoded.sub
       })
     })
     .catch((error) => {
@@ -54,14 +57,14 @@ class App extends Component {
   }
 
   render() {
-    let {role, token} = this.state
+    let {role, token, userId} = this.state
     return (
       <div className="App">
         <img src={logo} alt="logo" />
 
           <Router>
           {
-            token ? (role === 'admin' ? <Junction /> : <CheckIn />) :
+            token ? (role === 'admin' ? <Junction /> : <CheckIn userId={userId} />) :
             (
               <div>
                 <MuiThemeProvider>
@@ -98,6 +101,7 @@ class App extends Component {
   }
   componentDidMount = () => {
     if (localStorage.getItem("token")){
+      console.log(this.state.userId)
       let decoded = jwt.verify(localStorage.getItem("token"), `${process.env.REACT_APP_JWT_SECRET}`)
       this.setState({
         role: decoded.role
