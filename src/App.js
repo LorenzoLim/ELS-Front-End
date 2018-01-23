@@ -15,10 +15,10 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-    token: sessionStorage.getItem("token"),
+    token: localStorage.getItem("token"),
     email: null,
     password: null,
-    role: ''
+    role: null
     }
   };
 
@@ -38,7 +38,7 @@ class App extends Component {
       let decoded = jwt.verify(response.data.token, `${process.env.REACT_APP_JWT_SECRET}`)
       this.setState({
         token: response.data.token,
-        role: decoded
+        role: decoded.role
       })
       console.log(this.state.role)
     })
@@ -48,7 +48,7 @@ class App extends Component {
   }
 
   handleSignOut = () => {
-    sessionStorage.removeItem('token')
+    localStorage.removeItem('token')
     this.setState({
       token: null
     })
@@ -68,7 +68,7 @@ class App extends Component {
         }
           <Router>
           {
-            token ? (role === 'admin' || 'Admin' ? <Junction /> : <CheckIn />) :
+            token ? (role === 'admin' ? <Junction /> : <CheckIn />) :
             (
               <div>
                 <MuiThemeProvider>
@@ -95,6 +95,14 @@ class App extends Component {
           </Router>
       </div>
     );
+  }
+  componentDidMount = () => {
+    if (localStorage.getItem("token")){
+      let decoded = jwt.verify(localStorage.getItem("token"), `${process.env.REACT_APP_JWT_SECRET}`)
+      this.setState({
+        role: decoded.role
+      })
+    }
   }
 }
 

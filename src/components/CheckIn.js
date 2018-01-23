@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {MuiThemeProvider, MenuItem, RaisedButton, DropDownMenu, SelectField} from 'material-ui';
+import {MuiThemeProvider, MenuItem, RaisedButton, SelectField} from 'material-ui';
 import {api} from '../request'
 
  class CheckIn extends Component {
@@ -32,11 +32,12 @@ import {api} from '../request'
 
 
   handleCheckIn = () => {
+    let {selectedProject, selectedHourType} = this.state
     api({
       method: 'post',
       url: '/hours',
       data: {
-
+        selectedProject: {selectedHourType}
       }
     })
     .then((response) => {
@@ -94,7 +95,6 @@ import {api} from '../request'
           <br/>
           <RaisedButton  className="button"label="Start Work" primary={true} onClick={(event,newValue) => this.setState({selectedHourType:newValue})}/>
         </div>
-        <RaisedButton className="button"label="SignOut" primary={true} onClick={this.handleSignOut}/>
       </MuiThemeProvider>
     );
   }
