@@ -5,6 +5,7 @@ import {api} from '../request';
 
  class CheckIn extends Component {
   state = {
+    user_id:
     selectedHourType: null,
     selectedProject: null,
     checkedIn: false,
