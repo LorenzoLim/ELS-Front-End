@@ -49,7 +49,7 @@ class Junction extends Component {
 
             <RaisedButton className="button" label="Export" primary={true} onClick={(event) => this.handleCSVExport(event)}/>
 
-            <RaisedButton className="button" label="Create New Manager" primary={true} onClick={(event) => this.handleNewUser(event)}/>
+            <RaisedButton className="button" label="Create New User" primary={true} onClick={(event) => this.handleNewUser(event)}/>
 
             <RaisedButton className="button" label="Create New Project" primary={true} onClick={(event) => this.handleNewProject(event)}/>
           </div>
@@ -60,7 +60,6 @@ class Junction extends Component {
           <Route path="/newmanager" component={CreateUser} />
           <Route path="/newproject" component={CreateProject} />
         </Switch>
-
       </div>
     );
   }
