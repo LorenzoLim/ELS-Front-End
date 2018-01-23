@@ -59,13 +59,6 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
-        {
-          token && (
-            <MuiThemeProvider>
-              <RaisedButton className="button"label="SignOut" primary={true} onClick={this.handleSignOut}/>
-            </MuiThemeProvider>
-          )
-        }
           <Router>
           {
             token ? (role === 'admin' ? <Junction /> : <CheckIn />) :
@@ -93,6 +86,13 @@ class App extends Component {
             )
           }
           </Router>
+          {
+            token && (
+              <MuiThemeProvider>
+                <RaisedButton className="button"label="SignOut" primary={true} onClick={this.handleSignOut}/>
+              </MuiThemeProvider>
+            )
+          }
       </div>
     );
   }
