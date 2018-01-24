@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
+import {MuiThemeProvider, MenuItem, RaisedButton, SelectField, Toggle, TextField} from 'material-ui';
 import {api} from '../request';
-import {MuiThemeProvider, MenuItem, RaisedButton, SelectField} from 'material-ui';
 const jwt = require('jsonwebtoken');
 
  class CheckIn extends Component {
@@ -32,11 +32,11 @@ const jwt = require('jsonwebtoken');
           {_id: '17', type: 'Other - Training'},
           {_id: '18', type: 'Other - Travel'}
         ],
-        working: false,
         startTime: null,
         stopTime: null,
         totalTime: 0,
-        userId: this.props
+        userId: this.props.userId,
+        manualHour: false
       };
   }
 
@@ -71,7 +71,7 @@ const jwt = require('jsonwebtoken');
   startTimer = () => {
   	this.setState({
   		startTime: moment(),
-      working: true
+      checkedIn: true
   	})
   }
 
@@ -80,8 +80,7 @@ const jwt = require('jsonwebtoken');
   	this.setState({
       stopTime: moment(),
       totalTime: moment().diff(startTime, 'hours', true),
-      showTime: totalTime,
-      working: false,
+      checkedIn: false,
       selectedProject,
       selectedHourType
     })
@@ -89,61 +88,117 @@ const jwt = require('jsonwebtoken');
       method: 'post',
       url: '/hours',
       data: {
+        userId,
         total: totalTime,
         selectedProject,
-        selectedHourType,
-        userId
+        selectedHourType
       }
-    })
-    .then((response) => {
     })
     .catch((error) => {
       console.log(error);
     });
   }
 
+  submitManual = () => {
+    const {selectedProject, selectedHourType, totalTime, userId} = this.state
+    this.setState({
+      checkedIn: false,
+      selectedProject,
+      selectedHourType
+    })
+    api({
+      method: 'post',
+      url: '/hours',
+      data: {
+        userId,
+        total: totalTime,
+        selectedProject,
+        selectedHourType
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  toggleManualHours = (event) => {
+    this.setState((prevState) => {
+      return {
+        manualHour: prevState.manualHour === false ? true : false
+      }
+    })
+  }
+
   render() {
-    let {projects, selectedProject, working, startTime, stopTime, totalTime, selectedHourType, hourType} = this.state
+    console.log(this.state.userId);
+    let {projects, selectedProject, checkedIn, startTime, stopTime, totalTime, selectedHourType, hourType, manualHour} = this.state
     if (!projects || !hourType) {
       return null
     }
 
     return (
       <MuiThemeProvider>
-        <div>
-            { startTime && stopTime &&
-               <p>Total time: {stopTime}</p>
-             }
-
-          <SelectField
-            value={selectedProject}
-            onChange={this.handleProjectChange}
-            hintText='Select Project '
-            >
-              {projects.map((project) =>
-                <MenuItem key={project._id} value={project._id} primaryText={project.projectName} />
-              )}
-          </SelectField>
+        {
+          checkedIn ? (
+            <div>
+              <p>
+                Timer Started at {startTime.format("hh:mm A")}
+              </p>
+              <p>
+                Project - {selectedProject}
+              </p>
+              <p>
+                Type Of Hour - {selectedHourType}
+              </p>
+              <RaisedButton  className="button" label="Stop Work" primary={true} onClick={this.stopTimer}/>
+            </div>
+          ) : (
+            <div>
+              <SelectField
+              value={selectedProject}
+              onChange={this.handleProjectChange}
+              hintText='Select Project '
+              >
+                {projects.map((project) =>
+                  <MenuItem key={project._id} value={project._id} primaryText={project.projectName} />
+                )}
+            </SelectField>
             <br/>
-          <SelectField
-            value={selectedHourType}
-            onChange={this.handleHourChange}
-            autoWidth={false}
-            hintText='Select Type '
-          >
-            {
-              hourType.map((hour) =>
-                <MenuItem key={hour._id} value={hour.type} primaryText={hour.type} />
+            <SelectField
+              value={selectedHourType}
+              onChange={this.handleHourChange}
+              autoWidth={false}
+              hintText='Select Type '
+            >
+              {
+                hourType.map((hour) =>
+                  <MenuItem key={hour._id} value={hour.type} primaryText={hour.type} />
+              )}
+            </SelectField>
+            <br/>
+            <Toggle
+              label="Manual Set Hours"
+              className="adminToggle"
+              onToggle={this.toggleManualHours}
+            />
+            { manualHour ? (
+              <div>
+                <TextField
+                  floatingLabelText="Completed Hours"
+                  type="number"
+                  onChange = {(event,newValue) => this.setState({totalTime:newValue})}
+                />
+                <br/>
+                <RaisedButton  className="button" label="Submit Hours" primary={true} onClick={this.submitManual}/>
+              </div>
+            ) : (
+              <RaisedButton  className="button" label="Start Work" primary={true} onClick={this.startTimer}/>
             )}
-          </SelectField>
-          <br/>
-          {
-            !working ? <RaisedButton  className="button" label="Start Work" primary={true} onClick={this.startTimer}/> :
-            <RaisedButton  className="button" label="Stop Work" primary={true} onClick={this.stopTimer}/>
-          }
-        </div>
+          </div>
+        )}
       </MuiThemeProvider>
     );
   }
 }
+
 export default CheckIn

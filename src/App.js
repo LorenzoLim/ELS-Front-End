@@ -61,7 +61,6 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} alt="logo" />
-
           <Router>
           {
             token ? (role === 'admin' ? <Junction /> : <CheckIn userId={userId} />) :
@@ -101,7 +100,6 @@ class App extends Component {
   }
   componentDidMount = () => {
     if (localStorage.getItem("token")){
-      console.log(this.state.userId)
       let decoded = jwt.verify(localStorage.getItem("token"), `${process.env.REACT_APP_JWT_SECRET}`)
       this.setState({
         role: decoded.role
