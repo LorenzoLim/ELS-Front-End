@@ -79,8 +79,6 @@ navigate to http://localhost:3000
       ___
 ### 5) What needs improvement ###
 
-  - Admin
-  Admin can edit hours, edit and delete projects, ability to create multiple projects while staying on the same screen.
+  - Admin can edit hours, edit and delete projects, ability to create multiple projects while staying on the same screen.
 
-  - Manager
-  Safeguards put in so that managers can see and edit their hours in case they either forget to checkin or check out.
+  - Manager Safeguards put in so that managers can see and edit their hours in case they either forget to checkin or check out.
