@@ -8,21 +8,21 @@
   * Whats needs improvement
 ____
 ### 1) Application Brief ###  
-ELS is an easy to use app that allows DownerEDI employees to log hours spent on 
-projects mobily across their sites. ELS looks to shorten the time spent on report 
+ELS is an easy to use app that allows DownerEDI employees to log hours spent on
+projects mobily across their sites. ELS looks to shorten the time spent on report
 generating for admins.
 ___
 ### 2) WireFraming and Workflow Diagram ###
 
 Balsamiq was used for wireframing as we have used it on previous projects.
-![Wireframes](Documentaion/wireframe/admin-report-page.png)
-to see more navigate to documantation/wireframe to see the rest.
+![Wireframes](documentation/wireframe/admin-report-page.png)
+to see more navigate to documentation/wireframe to see the rest.
 ____
 #### User flow ###
 ![Userflow](documentation/UX_Flow.png)
 ___
 ### 3) User Stories ###
-* Project managers
+# Project managers
   * should be able to...
   * Sign in using my credentials so that the app knows it's me.
   * Be able to press a button to log my hours
@@ -32,7 +32,7 @@ ___
   * Sign out of the app
   * Leave comments for an admin about the project
 
-* Admin 
+# Admin
   * Should be able to...
   * Sign in using my credentials so that the app knows it's me
   * Create new project managers/engineers
@@ -45,47 +45,32 @@ ___
   * Delete managers
   * Delete projects
 
-* Developers
+# Developers
   * Should be able to...
   * Store databases online so that I can access it through the web
 ___
 
 # Built with
-  * Built using ReactJS, Express and mongoDB.
-  * Hosted on Mlabs and Heroku.
+  * Built using ReactJS, Node, Express and mongoDB.
+  * Hosted on Netlify
 
 ___
-### 4) Entity Relationship Diagram ###
-![ERD](public/images/erd.png?raw=true)
 
 ___
-### 5) Configuration steps
+### 4) Configuration steps
 
-make an env file into the root of the  folder. add htier secret and api url. 
+make an env file into the root of the  folder. add htier secret and api url.
 
 
   * Clone the repo
-  * Set up a dot env file and set all these up
-    * S3_BUCKET_NAME=yourS3BucketName(will need t be done as photos are hosted in development)
-    * AWS_ACCESS_KEY_ID=YourAWSAccessKEy
-    * AWS_SECRET_ACCESS_KEY=YourAwsSecretAccess_key
-    * AWS_REGION=AwsRegion
-    * MAIL_HOST=localhost:3000
-    * SENDMAIL_USERNAME=yoursendMailUserName
-    * SENDMAIL_PASSWORD=SendmailPassword
-    * SENDGRID_API=SendGridApi
-    * SENDGRID_API_NAME=SendGridName
-    * STRIPE_PUBLISHABLE_KEY=YourStripePublishableKey
-    * STRIPE_SECRET_KEY=YourStripeSecretKey
-    links for [sendgrid](https://app.sendgrid.com), [Stripe](https://dashboard.stripe.com), and [Amazon](https://signin.aws.amazon.com).
+  * Set up a dot env file and set all these up in the route directory and place in the following environment variables
+    * REACT_APP_API_URL=The-api-that-you-will-use
+    * REACT_APP_JWT_SECRET=willhavetomatchtheoneinyourbackendapienv
 
-
-
- To set up the app to run in the browser.
+ To set up the app to run locally in the browser.
 ```
 npm install
 ```
-
 
 and then
 
@@ -93,10 +78,14 @@ and then
 npm start
 ```
 
-navigate to http://localhost:3000/adminseed
-and login with the credentials provided in the seeds.rb file yay your an admin
-      ___
-### 6) What needs improvement ###
+This should open up a new window in your browser otherwise
+navigate to http://localhost:3000
 
-  - Managers
-  Managers can edit hours, edit and delete projects, ability to create multiple projects while staying ont he same screen, 
+      ___
+### 5) What needs improvement ###
+
+  - Admin
+  Admin can edit hours, edit and delete projects, ability to create multiple projects while staying on the same screen.
+
+  - Manager
+  Safeguards put in so that managers can see and edit their hours in case they either forget to checkin or check out. 
