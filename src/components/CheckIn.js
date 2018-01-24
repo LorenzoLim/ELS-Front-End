@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-import {MuiThemeProvider, MenuItem, RaisedButton, SelectField} from 'material-ui';
 import {api} from '../request';
+import {MuiThemeProvider, MenuItem, RaisedButton, SelectField} from 'material-ui';
+const jwt = require('jsonwebtoken');
 
  class CheckIn extends Component {
   constructor(props) {
@@ -38,7 +39,6 @@ import {api} from '../request';
         userId: this.props
       };
   }
-
 
   componentWillMount() {
     api.get ('/projects')
@@ -78,8 +78,10 @@ import {api} from '../request';
   stopTimer = () => {
     const {startTime, selectedProject, selectedHourType, totalTime, stopTime, userId} = this.state
   	this.setState({
-      stopTime: moment(),
+      userEmail: decoded.email,
+      stopTime: moment().toNow(),
       totalTime: moment().diff(startTime, 'hours', true),
+      showTime: totalTime,
       working: false,
       selectedProject,
       selectedHourType
@@ -88,6 +90,7 @@ import {api} from '../request';
       method: 'post',
       url: '/hours',
       data: {
+        userEmail,
         totalTime,
         selectedProject,
         selectedHourType,
@@ -95,7 +98,6 @@ import {api} from '../request';
       }
     })
     .then((response) => {
-      console.log(response)
     })
     .catch((error) => {
       console.log(error);
@@ -103,16 +105,16 @@ import {api} from '../request';
   }
 
   render() {
-    console.log(this.state.userId);
     let {projects, selectedProject, working, startTime, stopTime, totalTime, selectedHourType, hourType} = this.state
     if (!projects || !hourType) {
       return null
     }
+
     return (
       <MuiThemeProvider>
         <div>
             { startTime && stopTime &&
-               <p>Total time: {totalTime} minute/s</p>
+               <p>Total time: {stopTime}</p>
              }
 
           <SelectField
