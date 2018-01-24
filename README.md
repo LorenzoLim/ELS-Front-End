@@ -22,8 +22,8 @@ ____
 ![Userflow](documentation/UX_Flow.png)
 ___
 ### 3) User Stories ###
-# Project managers
-  * should be able to...
+### Project managers ###
+  * Should be able to...
   * Sign in using my credentials so that the app knows it's me.
   * Be able to press a button to log my hours
   * Be able to pick from a dropdown what projet I am working on
@@ -32,7 +32,7 @@ ___
   * Sign out of the app
   * Leave comments for an admin about the project
 
-# Admin
+### Admin ###
   * Should be able to...
   * Sign in using my credentials so that the app knows it's me
   * Create new project managers/engineers
@@ -45,7 +45,7 @@ ___
   * Delete managers
   * Delete projects
 
-# Developers
+### Developers ###
   * Should be able to...
   * Store databases online so that I can access it through the web
 ___
@@ -53,14 +53,10 @@ ___
 # Built with
   * Built using ReactJS, Node, Express and mongoDB.
   * Hosted on Netlify
-
-___
-
 ___
 ### 4) Configuration steps
 
 make an env file into the root of the  folder. add htier secret and api url.
-
 
   * Clone the repo
   * Set up a dot env file and set all these up in the route directory and place in the following environment variables
@@ -80,7 +76,6 @@ npm start
 
 This should open up a new window in your browser otherwise
 navigate to http://localhost:3000
-
       ___
 ### 5) What needs improvement ###
 
@@ -88,4 +83,4 @@ navigate to http://localhost:3000
   Admin can edit hours, edit and delete projects, ability to create multiple projects while staying on the same screen.
 
   - Manager
-  Safeguards put in so that managers can see and edit their hours in case they either forget to checkin or check out. 
+  Safeguards put in so that managers can see and edit their hours in case they either forget to checkin or check out.
