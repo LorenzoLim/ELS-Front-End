@@ -5,23 +5,42 @@ import {MuiThemeProvider, MenuItem, RaisedButton, SelectField} from 'material-ui
 const jwt = require('jsonwebtoken');
 
  class CheckIn extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+        selectedHourType: null,
+        selectedProject: null,
+        checkedIn: false,
+        projects: null,
+        hourType: [
+          {_id: '1', type: 'Project'},
+          {_id: '2', type: 'Business Support - Business Development'},
+          {_id: '3', type: 'Business Support - Commercial'},
+          {_id: '4', type: 'Business Support - Equipment Optimization'},
+          {_id: '5', type: 'Business Support - Maintenance'},
+          {_id: '6', type: 'Business Support - Manufacturing'},
+          {_id: '7', type: 'Business Support - Operations'},
+          {_id: '8', type: 'Business Support - Technical Services'},
+          {_id: '9', type: 'Business Support - Zero Harm'},
+          {_id: '10', type: 'Other - Administration'},
+          {_id: '11', type: 'Other - Attending Site'},
+          {_id: '12', type: 'Other - Audit'},
+          {_id: '13', type: 'Other - Information Technology'},
+          {_id: '14', type: 'Other - Leave-Planned (A/L, Public, Holiday)'},
+          {_id: '15', type: 'Other - Leave-Unplanned(Sick, Family Leave)'},
+          {_id: '16', type: 'Other - Meetings'},
+          {_id: '17', type: 'Other - Training'},
+          {_id: '18', type: 'Other - Travel'}
+        ],
+        working: false,
+        startTime: null,
+        stopTime: null,
+        totalTime: 0,
+        userId: this.props
+      };
+  }
 
-  state = {
-    userEmail: null,
-    selectedHourType: null,
-    selectedProject: null,
-    checkedIn: false,
-    projects: null,
-    hourType: null,
-    working: false,
-    startTime: null,
-  	stopTime: null,
-    showTime: null,
-  	totalTime: 0
-  };
-
-
-  componentWillMount(response) {
+  componentWillMount() {
     api.get ('/projects')
       .then(response => {
         this.setState({
@@ -31,15 +50,6 @@ const jwt = require('jsonwebtoken');
       .catch((error) => {
         console.log(error);
       });
-    api.get ('/hours')
-    .then(response => {
-      this.setState({
-        hourType: response.data
-      })
-    })
-    .catch((error) => {
-      console.log(error);
-    })
   }
 
   handleHourChange = (event, index, value) => {
@@ -66,11 +76,9 @@ const jwt = require('jsonwebtoken');
   }
 
   stopTimer = () => {
-    let {startTime, selectedProject, selectedHourType, totalTime, stopTime, userEmail} = this.state
-    let decoded = jwt.verify(localStorage.getItem("token"), `${process.env.REACT_APP_JWT_SECRET}`)
+    const {startTime, selectedProject, selectedHourType, totalTime, stopTime, userId} = this.state
   	this.setState({
-      userEmail: decoded.email,
-      stopTime: moment().toNow(),
+      stopTime: moment(),
       totalTime: moment().diff(startTime, 'hours', true),
       showTime: totalTime,
       working: false,
@@ -78,17 +86,16 @@ const jwt = require('jsonwebtoken');
       selectedHourType
     })
     api({
-      method: 'patch',
+      method: 'post',
       url: '/hours',
       data: {
-        userEmail,
-        totalTime,
+        total: totalTime,
         selectedProject,
-        selectedHourType
+        selectedHourType,
+        userId
       }
     })
     .then((response) => {
-      console.log(response)
     })
     .catch((error) => {
       console.log(error);
@@ -96,7 +103,7 @@ const jwt = require('jsonwebtoken');
   }
 
   render() {
-    let {projects, selectedProject, working, startTime, stopTime, totalTime, selectedHourType, hourType, showTime} = this.state
+    let {projects, selectedProject, working, startTime, stopTime, totalTime, selectedHourType, hourType} = this.state
     if (!projects || !hourType) {
       return null
     }
@@ -121,6 +128,7 @@ const jwt = require('jsonwebtoken');
           <SelectField
             value={selectedHourType}
             onChange={this.handleHourChange}
+            autoWidth={false}
             hintText='Select Type '
           >
             {
