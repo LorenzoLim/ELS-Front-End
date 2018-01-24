@@ -104,7 +104,7 @@ const jwt = require('jsonwebtoken');
     this.setState({
       checkedIn: false,
       selectedProject,
-      selectedHourType
+      selectedHourType,
       manualHour: false
     })
     api({
