@@ -17,7 +17,6 @@ class Junction extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
   }
   handleManage = (event) => {
     event.preventDefault
