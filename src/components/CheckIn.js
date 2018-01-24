@@ -105,6 +105,7 @@ const jwt = require('jsonwebtoken');
       checkedIn: false,
       selectedProject,
       selectedHourType
+      manualHour: false
     })
     api({
       method: 'post',

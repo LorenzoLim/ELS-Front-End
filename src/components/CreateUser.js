@@ -27,7 +27,6 @@ class CreateUser extends Component {
       }
      })
      .then((response) => {
-       console.log(response);
        if (response.status === 200) {
          this.setState({
            success: true

@@ -94,9 +94,6 @@ class ProjectCard extends Component {
             </TableRow>
           </TableBody>
         </Table>
-        <div>
-          <RaisedButton className="button" label="Export" onChange={this.handleDownload} primary={true} />
-        </div>
       </div>
     )
   }

@@ -30,7 +30,6 @@ class CreateProject extends Component {
       }
     })
     .then((response) => {
-      console.log(response);
       this.setState({
         success: true
       })
@@ -113,7 +112,6 @@ class CreateProject extends Component {
               >
                 {this.menuItems(selectedUsers)}
               </SelectField>
-              {console.log(values)}
               <br/>
               <RaisedButton className="button" label="Create Project" primary={true} onClick={(event) => this.handleCreateProject()} />
             </div>
