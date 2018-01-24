@@ -78,8 +78,7 @@ const jwt = require('jsonwebtoken');
   stopTimer = () => {
     const {startTime, selectedProject, selectedHourType, totalTime, stopTime, userId} = this.state
   	this.setState({
-      userEmail: decoded.email,
-      stopTime: moment().toNow(),
+      stopTime: moment()
       totalTime: moment().diff(startTime, 'hours', true),
       showTime: totalTime,
       working: false,
@@ -90,8 +89,7 @@ const jwt = require('jsonwebtoken');
       method: 'post',
       url: '/hours',
       data: {
-        userEmail,
-        totalTime,
+        total: totalTime,
         selectedProject,
         selectedHourType,
         userId
