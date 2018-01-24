@@ -17,6 +17,7 @@ class ProjectCard extends Component {
     projectName: "",
     projectStatus: "",
     projectUsers: null,
+    usersHours: null,
     showCheckboxes: false,
     fixedHeader: true,
     fixedFooter: true
@@ -44,13 +45,21 @@ class ProjectCard extends Component {
       .catch((error) => {
         console.log(error);
       });
-
+      api.get('/hours')
+      .then(({data}) => {
+        this.setState({
+          usersHours: data
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
-    const {projectLocation, projectStatus, projectNum, projectUsers} = this.state
+    const {projectLocation, projectStatus, projectNum, projectUsers, usersHours} = this.state
 
-    if (!projectUsers) {
+    if (!projectUsers || !usersHours) {
       return null;
     }
     return (
@@ -85,10 +94,13 @@ class ProjectCard extends Component {
               <TableRowColumn>{projectStatus}</TableRowColumn>
               <TableRowColumn>
                 {
-                  projectUsers.map((user) => (
-                    <span key={user._id}>{user.totalHours}<br /><hr /></span>
+                  usersHours.map((user) => (
+                    <span key={user._id}>{user.total}<br /><hr /></span>
                   )
                 )}
+
+
+                
               </TableRowColumn>
             </TableRow>
           </TableBody>
