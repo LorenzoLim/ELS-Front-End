@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import {MuiThemeProvider, MenuItem, RaisedButton, SelectField, Toggle, TextField} from 'material-ui';
 import {api} from '../request';
+import {MuiThemeProvider, MenuItem, RaisedButton, SelectField} from 'material-ui';
+const jwt = require('jsonwebtoken');
 
  class CheckIn extends Component {
   constructor(props) {
@@ -38,7 +40,6 @@ import {api} from '../request';
         manualHour: false
       };
   }
-
 
   componentWillMount() {
     api.get ('/projects')
@@ -135,6 +136,7 @@ import {api} from '../request';
     if (!projects || !hourType) {
       return null
     }
+
     return (
       <MuiThemeProvider>
         {
