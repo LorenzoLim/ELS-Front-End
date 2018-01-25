@@ -56,7 +56,8 @@ ___
 ___
 ### 4) Configuration steps
 
-make an env file into the root of the  folder. add htier secret and api url.
+make an env file into the root of the  folder. add their secret and api url.
+you can get the api from this repo https://github.com/LorenzoLim/ELS-Back-End
 
   * Clone the repo
   * Set up a dot env file and set all these up in the route directory and place in the following environment variables

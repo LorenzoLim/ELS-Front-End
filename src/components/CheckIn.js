@@ -4,40 +4,38 @@ import {MuiThemeProvider, MenuItem, RaisedButton, SelectField, Toggle, TextField
 import {api} from '../request';
 
 class CheckIn extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-        selectedHourType: null,
-        selectedProject: null,
-        checkedIn: false,
-        projects: null,
-        hourType: [
-          {_id: '1', type: 'Project'},
-          {_id: '2', type: 'Business Support - Business Development'},
-          {_id: '3', type: 'Business Support - Commercial'},
-          {_id: '4', type: 'Business Support - Equipment Optimization'},
-          {_id: '5', type: 'Business Support - Maintenance'},
-          {_id: '6', type: 'Business Support - Manufacturing'},
-          {_id: '7', type: 'Business Support - Operations'},
-          {_id: '8', type: 'Business Support - Technical Services'},
-          {_id: '9', type: 'Business Support - Zero Harm'},
-          {_id: '10', type: 'Other - Administration'},
-          {_id: '11', type: 'Other - Attending Site'},
-          {_id: '12', type: 'Other - Audit'},
-          {_id: '13', type: 'Other - Information Technology'},
-          {_id: '14', type: 'Other - Leave-Planned (A/L, Public, Holiday)'},
-          {_id: '15', type: 'Other - Leave-Unplanned(Sick, Family Leave)'},
-          {_id: '16', type: 'Other - Meetings'},
-          {_id: '17', type: 'Other - Training'},
-          {_id: '18', type: 'Other - Travel'}
-        ],
-        startTime: null,
-        stopTime: null,
-        totalTime: 0,
-        userId: this.props.userId,
-        manualHour: false
-      };
-  }
+  state = {
+    selectedHourType: null,
+    selectedProject: null,
+    checkedIn: false,
+    projects: null,
+    hourType: [
+      {_id: '1', type: 'Project'},
+      {_id: '2', type: 'Business Support - Business Development'},
+      {_id: '3', type: 'Business Support - Commercial'},
+      {_id: '4', type: 'Business Support - Equipment Optimization'},
+      {_id: '5', type: 'Business Support - Maintenance'},
+      {_id: '6', type: 'Business Support - Manufacturing'},
+      {_id: '7', type: 'Business Support - Operations'},
+      {_id: '8', type: 'Business Support - Technical Services'},
+      {_id: '9', type: 'Business Support - Zero Harm'},
+      {_id: '10', type: 'Other - Administration'},
+      {_id: '11', type: 'Other - Attending Site'},
+      {_id: '12', type: 'Other - Audit'},
+      {_id: '13', type: 'Other - Information Technology'},
+      {_id: '14', type: 'Other - Leave-Planned (A/L, Public, Holiday)'},
+      {_id: '15', type: 'Other - Leave-Unplanned(Sick, Family Leave)'},
+      {_id: '16', type: 'Other - Meetings'},
+      {_id: '17', type: 'Other - Training'},
+      {_id: '18', type: 'Other - Travel'}
+    ],
+    startTime: null,
+    stopTime: null,
+    totalTime: 0,
+    userId: this.props.userId,
+    manualHour: false
+  };
+
 
   componentWillMount() {
     api.get ('/projects')
@@ -77,7 +75,6 @@ class CheckIn extends Component {
   stopTimer = () => {
     const {startTime, selectedProject, selectedHourType, totalTime, userId} = this.state
   	this.setState({
-      stopTime: moment(),
       totalTime: moment().diff(startTime, 'hours', true),
       checkedIn: false,
       selectedProject,

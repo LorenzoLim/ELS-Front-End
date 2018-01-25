@@ -16,8 +16,6 @@ class Junction extends Component {
     data: null
   }
 
-  componentDidMount() {
-  }
   handleManage = (event) => {
     this.props.history.push('/manage')
   }
