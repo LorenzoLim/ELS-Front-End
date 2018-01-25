@@ -142,9 +142,6 @@ class CheckIn extends Component {
                 Timer Started at {startTime.format("hh:mm A")}
               </p>
               <p>
-                Project - {selectedProject}
-              </p>
-              <p>
                 Type Of Hour - {selectedHourType}
               </p>
               <RaisedButton  className="button" label="Stop Work" primary={true} onClick={this.stopTimer}/>
