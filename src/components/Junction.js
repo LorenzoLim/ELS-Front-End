@@ -19,22 +19,18 @@ class Junction extends Component {
   componentDidMount() {
   }
   handleManage = (event) => {
-    event.preventDefault
     this.props.history.push('/manage')
   }
 
   handleNewUser = (event) => {
-    event.preventDefault
     this.props.history.push('/newmanager')
   }
 
   handleNewProject = (event) => {
-    event.preventDefault
     this.props.history.push('/newproject')
   }
 
   handleCSVExport = (event) => {
-    event.preventDefault
     window.open(`${process.env.REACT_APP_API_URL}report.csv`, "_blank")
   }
 

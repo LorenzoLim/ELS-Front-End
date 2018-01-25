@@ -101,9 +101,13 @@ class App extends Component {
   componentDidMount = () => {
     if (localStorage.getItem("token")){
       let decoded = jwt.verify(localStorage.getItem("token"), `${process.env.REACT_APP_JWT_SECRET}`)
-      this.setState({
-        role: decoded.role
-      })
+      if (decoded.exp < Math.floor(Date.now() / 1000) + (60 * 60)) {
+        localStorage.removeItem("token")
+      } else {
+        this.setState({
+          role: decoded.role
+        }
+      )}
     }
   }
 }

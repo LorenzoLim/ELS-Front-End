@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import {MuiThemeProvider, MenuItem, RaisedButton, SelectField, Toggle, TextField} from 'material-ui';
 import {api} from '../request';
-const jwt = require('jsonwebtoken');
 
- class CheckIn extends Component {
+class CheckIn extends Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -76,7 +75,7 @@ const jwt = require('jsonwebtoken');
   }
 
   stopTimer = () => {
-    const {startTime, selectedProject, selectedHourType, totalTime, stopTime, userId} = this.state
+    const {startTime, selectedProject, selectedHourType, totalTime, userId} = this.state
   	this.setState({
       stopTime: moment(),
       totalTime: moment().diff(startTime, 'hours', true),
@@ -132,7 +131,7 @@ const jwt = require('jsonwebtoken');
 
   render() {
     console.log(this.state.userId);
-    let {projects, selectedProject, checkedIn, startTime, stopTime, totalTime, selectedHourType, hourType, manualHour} = this.state
+    let {projects, selectedProject, checkedIn, startTime, selectedHourType, hourType, manualHour} = this.state
     if (!projects || !hourType) {
       return null
     }
@@ -144,9 +143,6 @@ const jwt = require('jsonwebtoken');
             <div>
               <p>
                 Timer Started at {startTime.format("hh:mm A")}
-              </p>
-              <p>
-                Project - {selectedProject}
               </p>
               <p>
                 Type Of Hour - {selectedHourType}
