@@ -17,7 +17,7 @@ class ProjectCard extends Component {
     projectName: "",
     projectStatus: "",
     projectUsers: null,
-    usersHours: null,
+    hourDetails: null,
     showCheckboxes: false,
     fixedHeader: true,
     fixedFooter: true
@@ -45,10 +45,10 @@ class ProjectCard extends Component {
       .catch((error) => {
         console.log(error);
       });
-      api.get('/hours')
+      api.get(`/hours?projectId=${projectId}`)
       .then(({data}) => {
         this.setState({
-          usersHours: data
+          hourDetails: data
         })
       })
       .catch((error) => {
@@ -57,13 +57,23 @@ class ProjectCard extends Component {
   }
 
   render() {
-    const {projectLocation, projectStatus, projectNum, projectUsers, usersHours} = this.state
+    const {projectLocation, projectStatus, projectNum, projectUsers, hourDetails} = this.state
 
-    if (!projectUsers || !usersHours) {
+    if (!projectUsers || !hourDetails) {
       return null;
     }
+    const userHours = {};
+    hourDetails.forEach((userHour) => {
+      console.log(userHour.user_id._id);
+      const userId = userHour.user_id._id
+      if(!userHours[userId]){
+        userHours[userId] = userHour.total
+      }else{
+        userHours[userId] = userHours[userId] + userHour.total
+      }
+    })
+    // console.log(hourDetails.user_id._id);
     return (
-
       <div>
         <Table>
           <TableHeader
@@ -86,21 +96,19 @@ class ProjectCard extends Component {
               <TableRowColumn>
                 {
                   projectUsers.map((user) => (
-                    <span key={user._id}>{user.firstName} {user.lastName} <br /><hr /></span>
+                    <span key={user._id}>{user.firstName} {user.lastName} <br /><hr /></span>)
                   )
-                )}
+
+                }
               </TableRowColumn>
               <TableRowColumn>{projectLocation}</TableRowColumn>
               <TableRowColumn>{projectStatus}</TableRowColumn>
               <TableRowColumn>
                 {
-                  usersHours.map((user) => (
-                    <span key={user._id}>{user.total}<br /><hr /></span>
+                  Object.keys(userHours).map((key) =>
+                    <span key={key}>{userHours[key]}<br /><hr /></span>
                   )
-                )}
-
-
-                
+                }
               </TableRowColumn>
             </TableRow>
           </TableBody>
