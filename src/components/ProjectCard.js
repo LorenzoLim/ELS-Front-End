@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {api} from '../request.js'
 import {
   Table,
   TableBody,
@@ -6,9 +7,7 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn
-
 } from 'material-ui/Table';
-import {api} from '../request.js'
 
 class ProjectCard extends Component {
   state = {
@@ -22,15 +21,13 @@ class ProjectCard extends Component {
     fixedHeader: true,
     fixedFooter: true
   };
-  componentWillMount() {
-    this.fetchProject(this.props.projectId)
-  }
+  //
   componentWillReceiveProps(nextProps) {
     if (this.props.projectId !== nextProps.projectId) {
       this.fetchProject(nextProps.projectId)
     }
-
   }
+
   fetchProject(projectId) {
     api.get(`/projects/${projectId}`)
       .then(({data}) => {
@@ -64,7 +61,6 @@ class ProjectCard extends Component {
     }
     const userHours = {};
     hourDetails.forEach((userHour) => {
-      console.log(userHour.user_id._id);
       const userId = userHour.user_id._id
       if(!userHours[userId]){
         userHours[userId] = userHour.total
@@ -72,7 +68,6 @@ class ProjectCard extends Component {
         userHours[userId] = userHours[userId] + userHour.total
       }
     })
-    // console.log(hourDetails.user_id._id);
     return (
       <div>
         <Table>

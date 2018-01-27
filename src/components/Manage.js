@@ -45,8 +45,8 @@ class Manage extends Component {
                 <MenuItem key={project._id} value={project._id} primaryText={project.projectName} />
               )}
           </SelectField>
+          <ProjectCard projectId={selected}/>
         </div>
-        <ProjectCard projectId={selected}/>
       </MuiThemeProvider>
     );
   }
