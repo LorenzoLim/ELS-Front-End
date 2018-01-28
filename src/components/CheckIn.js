@@ -38,7 +38,7 @@ class CheckIn extends Component {
   };
 
   componentDidMount() {
-    api.get ('/projects')
+    api.get (`/projects?userId=${this.props.userId}`)
       .then(response => {
         this.setState({
           projects: response.data
