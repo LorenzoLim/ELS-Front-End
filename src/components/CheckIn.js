@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import {MuiThemeProvider, MenuItem, RaisedButton, SelectField, Toggle, TextField} from 'material-ui';
 import {api} from '../request';
+// import axios from 'axios';
 
 class CheckIn extends Component {
   state = {
@@ -36,9 +37,8 @@ class CheckIn extends Component {
     manualHour: false
   };
 
-
-  componentWillMount() {
-    api.get ('/projects')
+  componentDidMount() {
+    api.get (`/projects?userId=${this.props.userId}`)
       .then(response => {
         this.setState({
           projects: response.data
@@ -127,7 +127,6 @@ class CheckIn extends Component {
   }
 
   render() {
-    console.log(this.state.userId);
     let {projects, selectedProject, checkedIn, startTime, selectedHourType, hourType, manualHour} = this.state
     if (!projects || !hourType) {
       return null
