@@ -54,19 +54,19 @@ class Manage extends Component {
                adjustForCheckbox={showCheckboxes}
             >
               <TableRow className="tableHeaderStyle">
-                <TableHeaderColumn tooltip="Project number">Project Number</TableHeaderColumn>
-                <TableHeaderColumn tooltip="The managers">Manager/s</TableHeaderColumn>
-                <TableHeaderColumn tooltip="Location">Location</TableHeaderColumn>
-                <TableHeaderColumn tooltip="Status">Status</TableHeaderColumn>
-                <TableHeaderColumn tooltip="hours">Hours</TableHeaderColumn>
+                <TableHeaderColumn>Project Number</TableHeaderColumn>
+                <TableHeaderColumn>Project Name</TableHeaderColumn>
+                <TableHeaderColumn>Location</TableHeaderColumn>
+                <TableHeaderColumn>Status</TableHeaderColumn>
+                <TableHeaderColumn>Managers</TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            {projects.map((project) =>
+            {/* {projects.map((project) =>
               <TableRow>
-                <span key={projects._id}><br /><hr /></span>
+                <span key={projects._id}>{project}<br /><hr /></span>
               </TableRow>
-              )
-            }
+              ) 
+            } */}
           </Table>
           {/* <SelectField
             floatingLabelText="Select Project  "
