@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Manage from './Manage'
+import Projects from './Projects'
 import CreateUser from './CreateUser'
 import CreateProject from './CreateProject'
 import {MuiThemeProvider, RaisedButton, AppBar, Tabs, Tab} from 'material-ui';
@@ -50,7 +51,7 @@ class Junction extends Component {
               <Tab label="Projects" >
                 <div>
                   <h2 style={styles.headline}>Tab One</h2>
-
+                  <Projects />
                 </div>
               </Tab>
               <Tab label="Users" >
@@ -70,7 +71,7 @@ class Junction extends Component {
               <Tab label="Sign Out" data-route="/home">
                 <div>
                   <h2 style={styles.headline}>Tab Three</h2>
-                  <Manage />
+
                 </div>
               </Tab>
             </Tabs>
