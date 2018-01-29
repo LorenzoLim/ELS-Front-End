@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import Manage from './Manage'
 import CreateUser from './CreateUser'
 import CreateProject from './CreateProject'
-import {MuiThemeProvider, RaisedButton} from 'material-ui';
-import {Route, withRouter, Switch} from 'react-router-dom'
+import {MuiThemeProvider, RaisedButton, AppBar, Tabs, Tab} from 'material-ui';
+import {Route, withRouter, Switch} from 'react-router-dom';
 
 require('dotenv').config()
 
@@ -33,11 +33,48 @@ class Junction extends Component {
   }
 
   render() {
+    const styles = {
+      headline: {
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 400,
+      },
+    };
+
     return (
 
       <div>
         <MuiThemeProvider>
-          <div>
+            <Tabs>
+              <Tab label="Projects" >
+                <div>
+                  <h2 style={styles.headline}>Tab One</h2>
+
+                </div>
+              </Tab>
+              <Tab label="Users" >
+                <div>
+                  <h2 style={styles.headline}>Tab Two</h2>
+                  <p>
+                    This is another example tab.
+                  </p>
+                </div>
+              </Tab>
+              <Tab label="Report" data-route="/home">
+                <div>
+                  <h2 style={styles.headline}>Tab Three</h2>
+                  <Manage />
+                </div>
+              </Tab>
+              <Tab label="Sign Out" data-route="/home">
+                <div>
+                  <h2 style={styles.headline}>Tab Three</h2>
+                  <Manage />
+                </div>
+              </Tab>
+            </Tabs>
+          {/* <div>
             <RaisedButton className="button" label="Manage" primary={true}  onClick={(event) => this.handleManage(event)}/>
 
             <RaisedButton className="button" label="Export" primary={true} onClick={(event) => this.handleCSVExport(event)}/>
@@ -45,14 +82,14 @@ class Junction extends Component {
             <RaisedButton className="button" label="Create New User" primary={true} onClick={(event) => this.handleNewUser(event)}/>
 
             <RaisedButton className="button" label="Create New Project" primary={true} onClick={(event) => this.handleNewProject(event)}/>
-          </div>
+          </div> */}
         </MuiThemeProvider>
 
-        <Switch>
+        {/* <Switch>
           <Route path="/manage" component={Manage} />
           <Route path="/newmanager" component={CreateUser} />
           <Route path="/newproject" component={CreateProject} />
-        </Switch>
+        </Switch> */}
       </div>
     );
   }
