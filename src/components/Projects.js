@@ -1,11 +1,22 @@
 import React, {Component} from 'react';
 import {MuiThemeProvider, MenuItem} from 'material-ui';
-import {api} from '../request.js'
+import {api} from '../request.js';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table';
 
 class Manage extends Component {
   state = {
     projects: null,
-    selected: null
+    selected: null,
+    showCheckboxes: false,
+    fixedHeader: true,
+    fixedFooter: true
   };
 
   componentWillMount(response) {
@@ -27,7 +38,7 @@ class Manage extends Component {
   };
 
   render() {
-    const {projects, selected} = this.state
+    const {projects, selected, showCheckboxes, fixedHeader, fixedFooter} = this.state
     if (!projects) {
       return null
     }
@@ -35,9 +46,28 @@ class Manage extends Component {
     return (
       <MuiThemeProvider>
         <div>
-          {projects.map((project) =>
-            )
-          }
+          <Table>
+            <TableHeader
+               displaySelectAll={showCheckboxes}
+               fixedHeader={fixedHeader}
+               fixedFooter={fixedFooter}
+               adjustForCheckbox={showCheckboxes}
+            >
+              <TableRow className="tableHeaderStyle">
+                <TableHeaderColumn tooltip="Project number">Project Number</TableHeaderColumn>
+                <TableHeaderColumn tooltip="The managers">Manager/s</TableHeaderColumn>
+                <TableHeaderColumn tooltip="Location">Location</TableHeaderColumn>
+                <TableHeaderColumn tooltip="Status">Status</TableHeaderColumn>
+                <TableHeaderColumn tooltip="hours">Hours</TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            {projects.map((project) =>
+              <TableRow>
+                <span key={projects._id}><br /><hr /></span>
+              </TableRow>
+              )
+            }
+          </Table>
           {/* <SelectField
             floatingLabelText="Select Project  "
             value={selected}
