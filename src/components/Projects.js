@@ -65,7 +65,7 @@ class Manage extends Component {
               <TableRow>
                 <span key={projects._id}>{project}<br /><hr /></span>
               </TableRow>
-              )
+              ) 
             } */}
           </Table>
           {/* <SelectField
