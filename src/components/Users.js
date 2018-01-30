@@ -12,7 +12,7 @@ import {
 
 class Manage extends Component {
   state = {
-    projects: null,
+    users: null,
     selected: null,
     showCheckboxes: false,
     fixedHeader: true,
@@ -20,10 +20,10 @@ class Manage extends Component {
   };
 
   componentWillMount(response) {
-    api.get ('/projects')
+    api.get ('/users')
       .then(response => {
         this.setState({
-          projects: response.data
+          users: response.data
         })
       })
       .catch(function (error) {
@@ -38,8 +38,8 @@ class Manage extends Component {
   };
 
   render() {
-    const {projects, selected, showCheckboxes, fixedHeader, fixedFooter} = this.state
-    if (!projects) {
+    const {users, selected, showCheckboxes, fixedHeader, fixedFooter} = this.state
+    if (!users) {
       return null
     }
     return (
@@ -53,40 +53,25 @@ class Manage extends Component {
                adjustForCheckbox={showCheckboxes}
             >
               <TableRow className="tableHeaderStyle">
-                <TableHeaderColumn>Project Number</TableHeaderColumn>
-                <TableHeaderColumn>Project Name</TableHeaderColumn>
-                <TableHeaderColumn>Location</TableHeaderColumn>
-                <TableHeaderColumn>Status</TableHeaderColumn>
-                <TableHeaderColumn>Managers</TableHeaderColumn>
+                <TableHeaderColumn>Name</TableHeaderColumn>
+                <TableHeaderColumn>Email</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={this.state.showCheckboxes}>
-              {projects.map((project) =>
-                <TableRow key={project._id}>
-                  <TableRowColumn>{project.projectNum}</TableRowColumn>
-                  <TableRowColumn>{project.projectName}</TableRowColumn>
-                  <TableRowColumn>{project.projectLocation}</TableRowColumn>
-                  <TableRowColumn>{project.projectStatus}</TableRowColumn>
-                  <TableRowColumn>
+              {users.map((user) =>
+                <TableRow key={user._id}>
+                  <TableRowColumn>{user.firstName} {user.lastName}</TableRowColumn>
+                  <TableRowColumn>{user.email}</TableRowColumn>
+                  {/* <TableRowColumn>
                     {project.projectUsers.map((user) =>
                       <span key={user._id}>{user.firstName} {user.lastName}<br /></span>
                     )}
-                  </TableRowColumn>
+                  </TableRowColumn> */}
                 </TableRow>
                 )
               }
             </TableBody>
           </Table>
-          {/* <SelectField
-            floatingLabelText="Select Project  "
-            value={selected}
-            onChange={this.handleChange}
-            >
-              {projects.map((project) =>
-                <MenuItem key={project._id} value={project._id} primaryText={project.projectName} />
-              )}
-          </SelectField>
-          <ProjectCard projectId={selected}/> */}
         </div>
       </MuiThemeProvider>
     );
