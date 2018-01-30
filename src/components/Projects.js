@@ -42,7 +42,6 @@ class Manage extends Component {
     if (!projects) {
       return null
     }
-
     return (
       <MuiThemeProvider>
         <div>
@@ -61,12 +60,23 @@ class Manage extends Component {
                 <TableHeaderColumn>Managers</TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            {/* {projects.map((project) =>
-              <TableRow>
-                <span key={projects._id}>{project}<br /><hr /></span>
-              </TableRow>
-              )
-            } */}
+            <TableBody displayRowCheckbox={this.state.showCheckboxes}>
+              {projects.map((project) =>
+                <TableRow key={project._id}>
+                  <TableRowColumn>{project.projectNum}</TableRowColumn>
+                  <TableRowColumn>{project.projectName}</TableRowColumn>
+                  <TableRowColumn>{project.projectLocation}</TableRowColumn>
+                  <TableRowColumn>{project.projectStatus}</TableRowColumn>
+                  <TableRowColumn>
+                    {console.log(project.projectUsers[0].firstName)}
+                    {project.projectUsers.map((user) =>
+                      <span key={user._id}>{user.firstName} {user.lastName}<br /></span>
+                    )}
+                  </TableRowColumn>
+                </TableRow>
+                )
+              }
+            </TableBody>
           </Table>
           {/* <SelectField
             floatingLabelText="Select Project  "

@@ -50,7 +50,6 @@ class Junction extends Component {
             <Tabs>
               <Tab label="Projects" >
                 <div>
-                  <h2 style={styles.headline}>Tab One</h2>
                   <Projects />
                 </div>
               </Tab>

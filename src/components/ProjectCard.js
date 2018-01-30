@@ -29,28 +29,31 @@ class ProjectCard extends Component {
   }
 
   fetchProject(projectId) {
-    api.get(`/projects/${projectId}`)
-      .then(({data}) => {
-        this.setState({
-          projectNum: data.projectNum,
-          projectLocation: data.projectLocation,
-          projectName: data.projectName,
-          projectStatus: data.projectStatus,
-          projectUsers: data.projectUsers
+    if(this.state.hourDetails){
+      api.get(`/projects/${projectId}`)
+        .then(({data}) => {
+          this.setState({
+            projectNum: data.projectNum,
+            projectLocation: data.projectLocation,
+            projectName: data.projectName,
+            projectStatus: data.projectStatus,
+            projectUsers: data.projectUsers
+          })
         })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      api.get(`/hours?projectId=${projectId}`)
-      .then(({data}) => {
-        this.setState({
-          hourDetails: data
+        .catch((error) => {
+          console.log(error);
+        });
+
+        api.get(`/hours?projectId=${projectId}`)
+        .then(({data}) => {
+          this.setState({
+            hourDetails: data
+          })
         })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
+      }
   }
 
   render() {

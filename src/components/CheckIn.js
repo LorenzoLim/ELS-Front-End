@@ -38,15 +38,17 @@ class CheckIn extends Component {
   };
 
   componentDidMount() {
-    api.get (`/projects?userId=${this.props.userId}`)
-      .then(response => {
-        this.setState({
-          projects: response.data
+    if(this.state.projects){
+      api.get (`/projects?userId=${this.props.userId}`)
+        .then(response => {
+          this.setState({
+            projects: response.data
+          })
         })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   handleHourChange = (event, index, value) => {
