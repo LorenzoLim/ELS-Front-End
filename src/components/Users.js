@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {MuiThemeProvider, MenuItem} from 'material-ui';
+import {MuiThemeProvider} from 'material-ui';
 import {api} from '../request.js';
 import {
   Table,
@@ -38,7 +38,7 @@ class Manage extends Component {
   };
 
   render() {
-    const {users, selected, showCheckboxes, fixedHeader, fixedFooter} = this.state
+    const {users, showCheckboxes, fixedHeader, fixedFooter} = this.state
     if (!users) {
       return null
     }

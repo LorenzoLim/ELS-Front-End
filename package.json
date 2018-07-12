@@ -9,6 +9,7 @@
     "material-ui": "^0.20.0",
     "moment": "^2.20.1",
     "moment-timezone": "^0.5.14",
+    "npm": "^6.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-moment": "^0.7.0",
@@ -25,11 +26,11 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Travis-Anderson83/ELS-Front-End.git"
+    "url": "git+https://github.com/LorenzoLim/ELS-Front-End"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Travis-Anderson83/ELS-Front-End/issues"
+    "url": "https://github.com/LorenzoLim/ELS-Front-End/issues"
   }
 }

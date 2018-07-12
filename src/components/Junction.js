@@ -2,10 +2,8 @@ import React, {Component} from 'react'
 import Manage from './Manage'
 import Projects from './Projects'
 import Users from './Users'
-import CreateUser from './CreateUser'
-import CreateProject from './CreateProject'
-import {MuiThemeProvider, RaisedButton, AppBar, Tabs, Tab} from 'material-ui';
-import {Route, withRouter, Switch} from 'react-router-dom';
+import {MuiThemeProvider, Tabs, Tab} from 'material-ui';
+import {withRouter} from 'react-router-dom';
 
 require('dotenv').config()
 
