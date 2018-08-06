@@ -8,25 +8,15 @@ import {withRouter} from 'react-router-dom';
 require('dotenv').config()
 
 class Junction extends Component {
-
-  state = {
-    manage: false,
-    newUser: false,
-    newProject: false,
-    data: null
-  }
-
-  handleManage = (event) => {
-    this.props.history.push('/manage')
-  }
-
-  handleNewUser = (event) => {
-    this.props.history.push('/newmanager')
-  }
-
-  handleNewProject = (event) => {
-    this.props.history.push('/newproject')
-  }
+  constructor(props){
+    super(props);
+    this.state = {
+      manage: false,
+      newUser: false,
+      newProject: false,
+      data: null
+    }
+  };
 
   handleCSVExport = (event) => {
     window.open(`${process.env.REACT_APP_API_URL}report.csv`, "_blank")
@@ -57,13 +47,13 @@ class Junction extends Component {
                   <Users />
                 </div>
               </Tab>
-              <Tab label="Report" data-route="/home">
+              <Tab label="Report">
                 <div>
                   <h2 style={styles.headline}>Tab Three</h2>
                   <Manage />
                 </div>
               </Tab>
-              <Tab label="Sign Out" data-route="/home">
+              <Tab label="Sign Out">
                 <div>
                   <h2 style={styles.headline}>Tab Three</h2>
 

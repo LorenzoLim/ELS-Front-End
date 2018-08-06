@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css'
+import styles from './App.css'
 import logo from './images/downer-logo.jpg'
 import Junction from './components/Junction'
 import CheckIn from './components/CheckIn'
@@ -63,7 +63,7 @@ class App extends Component {
         <img src={logo} alt="logo" />
           <Router>
           {
-            token ? (role === 'admin' ? <Junction /> : <CheckIn userId={userId} />) :
+            token ? (role === 'admin' ? <Junction styles={styles} handleSignOut={this.handleSignOut} /> : <CheckIn userId={userId} styles={styles} handleSignOut={this.handleSignOut} />) :
             (
               <div>
                 <MuiThemeProvider>
@@ -88,13 +88,13 @@ class App extends Component {
             )
           }
           </Router>
-          {
+          {/* {
             token && (
               <MuiThemeProvider>
                 <RaisedButton className="button"label="SignOut" primary={true} onClick={this.handleSignOut}/>
               </MuiThemeProvider>
             )
-          }
+          } */}
       </div>
     );
   }
